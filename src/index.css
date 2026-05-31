@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-card-bg: #111111;
+  --color-accent-primary: #3b82f6;
+  --color-accent-secondary: #06b6d4;
+}
+
+/* Custom background grid styling like Vercel and Figma */
+.bg-grid {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+.bg-dot-grid {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1.5px);
+}
+
+/* Smooth custom glass card styles resembling Linear / Raycast */
+.glass-panel {
+  background: rgba(17, 17, 17, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #222222;
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(10, 10, 10, 0.95);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Custom subtle glow element */
+.bg-gradient-glow {
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.01) 50%, transparent 100%);
+}
+
+/* Premium micro-border styling */
+.glowing-border {
+  border: 1px solid transparent;
+  background: linear-gradient(#111111, #111111) padding-box,
+              linear-gradient(to right, #222222, #3b82f6) border-box;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #222222;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+/* Smooth glowing cursor follow if needed */
+.glow-blur {
+  filter: blur(120px);
+}
+

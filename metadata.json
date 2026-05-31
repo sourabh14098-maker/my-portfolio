@@ -1,0 +1,6 @@
+{
+  "name": "NYXO Portfolio",
+  "description": "Ultra-premium personal portfolio website for NYXO - Computer Science student, frontend developer, and full-stack learner.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
