@@ -6,88 +6,81 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function Layout() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [showScrollUp, setShowScrollUp] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
     const handleScroll = () => {
-      setShowScrollUp(window.scrollY > 300);
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+      setShowScrollUp(scrollTop > 300);
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // PDF CV mock downloader alert
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const triggerResumeDownload = () => {
-    alert("Resume download triggered!\nNYXO_Resume.pdf would be fetched directly.");
+    alert('Resume download triggered!\nSourabh_Raj_Resume.pdf would be fetched directly.');
   };
 
   const backdropParticles = useRef(
-    Array.from({ length: 25 }, (_, i) => ({
+    Array.from({ length: 12 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 20 + 15
+      size: Math.random() * 2 + 1,
+      duration: Math.random() * 20 + 18,
     }))
   ).current;
 
   return (
-    <div className="relative min-h-screen bg-[#000000] text-[#ffffff] font-sans selection:bg-[#3b82f6]/40 selection:text-white overflow-x-hidden">
-      
-      {/* Interactive mouse radial ambient bloom */}
-      <div 
-        className="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full w-[400px] h-[400px] bg-white/[0.02] border border-white/[0.01] blur-[80px] z-10 transition-transform duration-75 hidden md:block"
-        style={{ left: `${mousePosition.x}px`, top: `${mousePosition.y}px` }}
-      />
+    <div className="relative min-h-screen bg-[#050505] text-white font-sans selection:bg-white/10 overflow-x-hidden">
+      {/* Scroll progress indicator */}
+      <div className="fixed top-0 left-0 right-0 h-px bg-[#222222] z-[60]">
+        <motion.div
+          className="h-full bg-white/40 origin-left"
+          style={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.1 }}
+        />
+      </div>
 
-      {/* Grid background + abstract stars overlay */}
-      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none z-0" />
-      <div className="absolute inset-0 bg-dot-grid opacity-15 pointer-events-none z-0" />
-      
-      {/* Abstract floating dynamic stars */}
+      <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none z-0" />
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {backdropParticles.map((pt) => (
           <motion.div
             key={pt.id}
-            className="absolute rounded-full bg-white/20"
+            className="absolute rounded-full bg-white/10"
             style={{
               left: `${pt.x}%`,
               top: `${pt.y}%`,
               width: `${pt.size}px`,
-              height: `${pt.size}px`
+              height: `${pt.size}px`,
             }}
-            animate={{
-              y: ['0px', '-40px', '0px'],
-              opacity: [0.15, 0.6, 0.15]
-            }}
-            transition={{
-              duration: pt.duration,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
+            animate={{ y: ['0px', '-24px', '0px'], opacity: [0.08, 0.25, 0.08] }}
+            transition={{ duration: pt.duration, repeat: Infinity, ease: 'easeInOut' }}
           />
         ))}
       </div>
 
       <Navbar triggerResumeDownload={triggerResumeDownload} />
 
-      <main className="relative z-20 pt-24 min-h-[calc(100vh-250px)]">
+      <main className="relative z-20 pt-24 min-h-[calc(100vh-200px)]">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
-            initial={{ opacity: 0, y: 15, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, y: -15, filter: 'blur(10px)' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <Outlet context={{ triggerResumeDownload }} />
           </motion.div>
@@ -96,16 +89,15 @@ export default function Layout() {
 
       <Footer />
 
-      {/* Persistent floating Scroll to Top Trigger */}
       <AnimatePresence>
         {showScrollUp && (
           <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
+            exit={{ opacity: 0, scale: 0.85 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             id="floating-scroll-top"
-            className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-[#111111] border border-[#222222] text-[#3b82f6] flex items-center justify-center shadow-md backdrop-blur-md cursor-pointer hover:bg-[#1a1a1a] transition-colors duration-200"
+            className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-[#111111]/90 border border-[#222222] text-zinc-400 hover:text-white flex items-center justify-center backdrop-blur-md cursor-pointer hover:border-white/20 transition-all duration-300"
             title="Scroll to Top"
           >
             <ArrowUp className="w-4 h-4" />
