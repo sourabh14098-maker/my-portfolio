@@ -1,100 +1,219 @@
-import { motion } from 'motion/react';
-import { ExternalLink, Github } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, X, ExternalLink, Check } from 'lucide-react';
 import { projectsData } from '../data';
+import { Project } from '../types';
+import PageHeader from './ui/PageHeader';
+import Reveal from './ui/Reveal';
 
 export default function ProjectsPage() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
-    <div className="py-16 md:py-24 px-6 relative z-10">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-14 md:mb-16"
-        >
-          <h2
-            id="projects-title"
-            className="text-xs font-mono text-zinc-500 uppercase tracking-widest font-medium mb-4"
-          >
-            Projects
-          </h2>
-          <p className="text-3xl md:text-4xl font-display font-medium tracking-tight text-white">
-            Selected Work
-          </p>
-        </motion.div>
+    <section className="section-page relative z-10">
+      <div className="max-w-7xl mx-auto">
+        <PageHeader
+          label="Projects"
+          title="Selected Work"
+          description="Projects built with focus on detail, clean code, and intuitive user experience."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {projectsData.map((project, index) => (
-            <motion.article
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -4 }}
-              className="group rounded-2xl border border-[#222222] bg-[#050505] overflow-hidden flex flex-col hover:border-[#333333] transition-all duration-300"
-            >
-              <div className="relative h-48 overflow-hidden border-b border-[#161616]">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transition-all duration-[400ms] ease group-hover:scale-[1.03]"
-                />
-              </div>
-
-              <div className="p-6 flex flex-col flex-1 gap-4">
-                <div>
-                  <p className="text-[10px] font-mono text-zinc-600 uppercase tracking-wider mb-1.5">
+            <Reveal key={project.id} delay={index * 0.06}>
+              <motion.article
+                whileHover={{ y: -3 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                className="premium-card rounded-2xl overflow-hidden flex flex-col h-full group"
+              >
+                <div className="relative h-44 sm:h-48 overflow-hidden border-b border-[#1a1a1a]">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-[400ms] ease group-hover:scale-[1.03]"
+                  />
+                  <span className="absolute top-4 left-4 px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider text-zinc-400 bg-[#050505]/90 border border-[#222222] rounded-full">
                     {project.subtitle}
-                  </p>
-                  <h3 className="text-xl font-display font-medium text-white mb-2">
+                  </span>
+                </div>
+
+                <div className="p-6 flex flex-col flex-1 text-left">
+                  <h3 className="text-lg font-display font-medium text-white mb-2 group-hover:text-zinc-200 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-zinc-500 leading-relaxed">{project.description}</p>
+                  <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed mb-5 flex-1">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {project.tags.slice(0, 4).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono text-zinc-500 px-2 py-0.5 rounded-md border border-[#1a1a1a]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProject(project)}
+                    id={`case-study-trigger-${project.id}`}
+                    className="btn-secondary !w-full !text-xs !py-2.5 cursor-pointer"
+                  >
+                    View case study
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
-
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono text-zinc-500 px-2 py-0.5 rounded-md border border-[#222222] bg-black"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-3 pt-2 mt-auto">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      id={`project-github-${project.id}`}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#222222] bg-black text-xs font-medium text-zinc-300 hover:text-white hover:border-[#333333] transition-all duration-300"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      GitHub
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      id={`project-live-${project.id}`}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-black text-xs font-medium hover:bg-zinc-200 transition-colors duration-300"
-                    >
-                      Live Demo
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </motion.article>
+              </motion.article>
+            </Reveal>
           ))}
         </div>
       </div>
-    </div>
+
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            id="case-study-modal-backdrop"
+            className="fixed inset-0 bg-[#050505]/92 backdrop-blur-md z-[60] overflow-y-auto px-4 sm:px-6 py-10 sm:py-12 flex items-start justify-center"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+              className="glass-panel rounded-2xl sm:rounded-3xl p-6 md:p-10 w-full max-w-4xl bg-[#0a0a0a] relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedProject(null)}
+                id="case-study-modal-close"
+                className="absolute top-4 right-4 w-10 h-10 rounded-full border border-[#222222] bg-[#050505] flex items-center justify-center text-zinc-500 hover:text-white premium-hover z-10"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="mb-6 text-left pr-12">
+                <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.15em] mb-1">
+                  {selectedProject.subtitle}
+                </p>
+                <h3 className="text-2xl md:text-3xl font-display font-medium text-white">
+                  {selectedProject.title}
+                </h3>
+              </div>
+
+              <div className="w-full h-56 md:h-72 rounded-xl overflow-hidden mb-8 border border-[#1a1a1a]">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 text-left">
+                <div className="md:col-span-7 flex flex-col gap-6">
+                  <div>
+                    <h4 className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.15em] mb-2">
+                      Overview
+                    </h4>
+                    <p className="text-zinc-400 text-sm leading-relaxed">
+                      {selectedProject.longDescription}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.15em] mb-3">
+                      Key features
+                    </h4>
+                    <ul className="flex flex-col gap-2">
+                      {selectedProject.features.map((feature, i) => (
+                        <li key={i} className="flex items-start gap-2.5 text-sm text-zinc-400">
+                          <span className="mt-0.5 w-4 h-4 rounded-full border border-[#333333] flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 text-zinc-300" />
+                          </span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="premium-card rounded-xl p-4">
+                    <p className="text-sm text-zinc-400 leading-relaxed italic">
+                      &ldquo;{selectedProject.caseStudy.results}&rdquo;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="md:col-span-5 flex flex-col gap-6">
+                  <div className="premium-card rounded-xl p-5">
+                    <h4 className="text-[11px] font-mono text-zinc-600 uppercase tracking-[0.15em] mb-3">
+                      Stack
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedProject.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono border border-[#1a1a1a] px-2 py-0.5 rounded-full text-zinc-400"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-3">
+                    <h4 className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.15em]">
+                      Challenges &amp; solutions
+                    </h4>
+                    {selectedProject.caseStudy.challenges.map((challenge, i) => (
+                      <div key={i} className="premium-card rounded-xl p-4 text-sm">
+                        <p className="text-zinc-600 font-mono text-[10px] uppercase mb-1">
+                          Challenge {i + 1}
+                        </p>
+                        <p className="text-zinc-500 leading-relaxed mb-3">{challenge}</p>
+                        <p className="text-zinc-600 font-mono text-[10px] uppercase mb-1">Solution</p>
+                        <p className="text-zinc-300 leading-relaxed">
+                          {selectedProject.caseStudy.solutions[i]}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[#1a1a1a] flex flex-col sm:flex-row justify-end gap-3">
+                {selectedProject.githubUrl && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary !text-xs"
+                  >
+                    View repository
+                  </a>
+                )}
+                {selectedProject.liveUrl && selectedProject.liveUrl !== '#' && (
+                  <a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-primary !text-xs"
+                  >
+                    Live demo
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }

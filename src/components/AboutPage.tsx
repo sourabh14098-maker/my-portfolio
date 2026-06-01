@@ -1,76 +1,64 @@
-import { motion } from 'motion/react';
-import { Terminal, BookOpen, Cpu } from 'lucide-react';
+import React from 'react';
+import { Terminal, BookOpen, Cpu, Rocket } from 'lucide-react';
 import { timelineData } from '../data';
-
-const iconMap = {
-  Terminal,
-  BookOpen,
-  Cpu,
-} as const;
+import PageHeader from './ui/PageHeader';
+import Reveal from './ui/Reveal';
 
 export default function AboutPage() {
   return (
-    <section id="about" className="py-16 md:py-24 px-6 relative z-10">
+    <section id="about" className="section-page relative z-10">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 md:mb-20"
-        >
-          <h2
-            id="about-title"
-            className="text-xs font-mono text-zinc-500 uppercase tracking-widest font-medium mb-4"
-          >
-            About
-          </h2>
-          <p className="text-3xl md:text-4xl font-display font-medium tracking-tight text-white">
-            My Journey
-          </p>
-        </motion.div>
+        <PageHeader
+          label="About"
+          title="From Curiosity to Code"
+          description="A glimpse into my journey from learning programming fundamentals to building real-world applications."
+        />
 
-        <div className="relative pl-8 md:pl-10">
-          <div className="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-[#222222]" />
-
+        <div className="relative border-l border-[#1a1a1a] pl-8 sm:pl-10 ml-2 sm:ml-4">
           {timelineData.map((event, index) => {
-            const Icon = iconMap[event.icon as keyof typeof iconMap] ?? Terminal;
+            const IconComp =
+              event.icon === 'Terminal'
+                ? Terminal
+                : event.icon === 'BookOpen'
+                  ? BookOpen
+                  : event.icon === 'Cpu'
+                    ? Cpu
+                    : Rocket;
+
             const isOngoing = event.status === 'ongoing';
+            const isFuture = event.status === 'future';
 
             return (
-              <motion.div
-                key={event.year}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="relative pb-14 last:pb-0 group"
-              >
-                <div
-                  className={`absolute -left-8 md:-left-10 top-1.5 w-[15px] h-[15px] rounded-full border bg-[#050505] flex items-center justify-center ${
-                    isOngoing ? 'border-white/40' : 'border-[#333333]'
-                  }`}
-                >
+              <Reveal key={index} delay={index * 0.08} className="relative mb-12 last:mb-0 group/time">
+                <div className="absolute -left-[33px] sm:-left-[41px] top-1 w-4 h-4 rounded-full bg-[#050505] border border-[#222222] flex items-center justify-center">
                   <span
-                    className={`w-1.5 h-1.5 rounded-full ${isOngoing ? 'bg-white' : 'bg-zinc-600'}`}
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      isOngoing ? 'bg-[#3b82f6]' : isFuture ? 'bg-zinc-700' : 'bg-zinc-400'
+                    }`}
                   />
                 </div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-mono text-zinc-500 tracking-wider uppercase">
-                      {event.year}
+                <article className="premium-card rounded-2xl p-6 sm:p-8">
+                  <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-mono text-zinc-500 px-2.5 py-1 rounded-full border border-[#222222]">
+                        {event.year}
+                      </span>
+                      <IconComp className="w-3.5 h-3.5 text-zinc-600" strokeWidth={1.5} />
+                    </div>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-600">
+                      {event.status === 'completed' && 'Completed'}
+                      {isOngoing && 'In progress'}
+                      {isFuture && 'Upcoming'}
                     </span>
-                    <Icon className="w-3.5 h-3.5 text-zinc-600" strokeWidth={1.5} />
                   </div>
 
-                  <h3 className="text-lg md:text-xl font-display font-medium text-white tracking-tight">
+                  <h3 className="text-lg font-display font-medium text-white mb-2 group-hover/time:text-zinc-100 transition-colors">
                     {event.title}
                   </h3>
-
-                  <p className="text-sm text-zinc-500 leading-relaxed max-w-xl">
-                    {event.description}
-                  </p>
-                </div>
-              </motion.div>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{event.description}</p>
+                </article>
+              </Reveal>
             );
           })}
         </div>

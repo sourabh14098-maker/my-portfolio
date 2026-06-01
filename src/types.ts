@@ -13,6 +13,7 @@ export interface TimelineEvent {
 
 export interface Skill {
   name: string;
+  level: number; // 0 to 100 for visualization
   icon?: string;
 }
 
@@ -43,8 +44,25 @@ export interface Project {
   caseStudy: CaseStudy;
 }
 
+export interface GitHubStats {
+  followers: number;
+  stars: number;
+  commitsThisYear: number;
+  contributions: {
+    labels: string[];
+    values: number[]; // Activity frequency
+  };
+  topLanguages: {
+    name: string;
+    percentage: number;
+    color: string;
+  }[];
+}
+
 export interface Achievement {
   id: string;
-  emoji: string;
   title: string;
+  value: string;
+  subtext: string;
+  iconName: string;
 }
