@@ -19,6 +19,7 @@ export default function Navbar() {
     if (path === '/') return location.pathname === '/';
     return location.pathname === path;
   };
+  const homeActive = location.pathname === '/';
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -32,18 +33,20 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 pt-4">
-      <div className="mx-auto w-[92%] lg:w-[70%]">
+      <div className="mx-auto w-[92%] max-w-7xl px-5 sm:px-6 lg:px-8">
         <nav
-          className={`relative h-[70px] rounded-full px-5 sm:px-7 flex items-center justify-between border border-white/[0.08] bg-black/55 backdrop-blur-2xl transition-all duration-500 ${
+          className={`relative h-[70px] w-full lg:w-[56%] rounded-full px-5 sm:px-7 flex items-center justify-between border border-white/[0.08] bg-black/60 backdrop-blur-2xl transition-all duration-[260ms] ${
             scrolled
-              ? 'shadow-[0_18px_60px_rgba(0,0,0,0.42)] bg-black/70 border-white/[0.12]'
+              ? 'shadow-[0_18px_60px_rgba(0,0,0,0.42)] bg-black/72 border-white/[0.12]'
               : 'shadow-[0_10px_34px_rgba(0,0,0,0.22)]'
           }`}
         >
           <Link
             to="/"
             id="nav-logo"
-            className="z-10 w-24 font-display text-base sm:text-lg font-semibold tracking-[0.22em] text-white transition-opacity duration-300 hover:opacity-75"
+            className={`z-10 w-24 rounded-full px-3 py-2 font-display text-base sm:text-lg font-semibold tracking-[0.22em] text-white transition-all duration-[240ms] hover:opacity-80 ${
+              homeActive ? 'bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]' : ''
+            }`}
           >
             NYXO
           </Link>
@@ -56,15 +59,15 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   id={`nav-link-${link.name.toLowerCase()}`}
-                  className={`relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.035em] transition-colors duration-300 ${
-                    active ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'
+                  className={`relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.035em] transition-all duration-[240ms] ${
+                    active ? 'text-white' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.035]'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="navActiveIndicator"
-                      className="absolute inset-0 rounded-full border border-white/[0.08] bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                      className="absolute inset-0 rounded-full border border-white/[0.16] bg-white/[0.14] shadow-[0_8px_24px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.14)]"
+                      transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
@@ -79,7 +82,7 @@ export default function Navbar() {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-trigger"
-            className="z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-white/[0.14] hover:bg-white/[0.08] hover:text-white lg:hidden"
+            className="z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-400 transition-all duration-[240ms] hover:border-white/[0.14] hover:bg-white/[0.08] hover:text-white lg:hidden"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -93,7 +96,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
             className="absolute left-1/2 top-[5.75rem] z-40 w-[92%] -translate-x-1/2 lg:hidden"
           >
             <div className="flex flex-col gap-1 rounded-[28px] border border-white/[0.08] bg-black/75 p-3 shadow-[0_18px_60px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
@@ -103,8 +106,8 @@ export default function Navbar() {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`relative rounded-2xl px-4 py-3 text-sm font-medium tracking-[0.03em] transition-colors ${
-                      active ? 'bg-white/[0.08] text-white' : 'text-zinc-500 hover:bg-white/[0.04] hover:text-white'
+                    className={`relative rounded-2xl px-4 py-3 text-sm font-medium tracking-[0.03em] transition-colors duration-[240ms] ${
+                      active ? 'bg-white/[0.13] text-white' : 'text-zinc-500 hover:bg-white/[0.04] hover:text-white'
                     }`}
                   >
                     {link.name}

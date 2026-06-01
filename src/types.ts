@@ -62,7 +62,8 @@ export interface GitHubStats {
 export interface Achievement {
   id: string;
   title: string;
-  value: string;
-  subtext: string;
-  iconName: string;
+  value?: string;
+  subtext?: string;
+  iconName?: string;
+  emoji?: string;
 }

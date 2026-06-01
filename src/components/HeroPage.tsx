@@ -11,19 +11,19 @@ const heroStaggerContainer = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.08,
+      staggerChildren: 0.06,
+      delayChildren: 0.04,
     },
   },
 };
 
 const heroStaggerItem = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(10px)' },
+  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
   show: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.65, ease: easePremium },
+    transition: { duration: 0.28, ease: easePremium },
   },
 };
 
@@ -32,26 +32,29 @@ export default function HeroPage() {
 
   const leftContent = (
     <>
-      <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 max-w-2xl">
+      <div className="flex max-w-[680px] flex-col gap-6 sm:gap-7 lg:gap-8">
         <motion.h1
           variants={playHeroEntrance ? heroStaggerItem : undefined}
           initial={playHeroEntrance ? undefined : { opacity: 0, y: 20 }}
           animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-          transition={playHeroEntrance ? undefined : { duration: 0.7, ease: easePremium }}
+          transition={playHeroEntrance ? undefined : { duration: 0.28, ease: easePremium }}
           id="main-hero-title"
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] xl:text-[4.25rem] font-display font-medium tracking-[-0.03em] text-white leading-[1.08]"
+          className="max-w-[760px] text-4xl sm:text-5xl md:text-6xl lg:text-[3.55rem] xl:text-[4.05rem] font-display font-medium tracking-normal text-white leading-[0.98] sm:leading-[1.01]"
         >
-          Building Modern <span className="text-zinc-400">Digital Experiences</span>
+          <span className="block text-white">Building Modern</span>
+          <span className="block bg-gradient-to-r from-white via-zinc-300 to-violet-300 bg-clip-text text-transparent">
+            Digital Experiences
+          </span>
         </motion.h1>
 
         <motion.p
           variants={playHeroEntrance ? heroStaggerItem : undefined}
           initial={playHeroEntrance ? undefined : { opacity: 0, y: 12 }}
           animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-          transition={playHeroEntrance ? undefined : { duration: 0.6, delay: 0.08, ease: easePremium }}
-          className="text-zinc-500 font-mono text-xs sm:text-sm tracking-[0.14em] uppercase font-medium leading-relaxed"
+          transition={playHeroEntrance ? undefined : { duration: 0.24, delay: 0.04, ease: easePremium }}
+          className="max-w-[620px] text-zinc-400 font-mono text-[11px] sm:text-xs tracking-[0.13em] uppercase font-medium leading-relaxed"
         >
-          Computer Science Student · Frontend Developer · Full Stack Learner
+          Computer Science Student / Frontend Developer / Full Stack Learner
         </motion.p>
       </div>
 
@@ -59,9 +62,9 @@ export default function HeroPage() {
         variants={playHeroEntrance ? heroStaggerItem : undefined}
         initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.65, delay: 0.14, ease: easePremium }}
+        transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.08, ease: easePremium }}
         id="hero-desc"
-        className="text-zinc-500 text-sm md:text-base max-w-lg leading-relaxed"
+        className="max-w-[560px] text-sm md:text-base text-zinc-400/90 leading-7"
       >
         Passionate about creating modern web applications, solving real-world problems, and building
         products that make an impact.
@@ -71,26 +74,33 @@ export default function HeroPage() {
         variants={playHeroEntrance ? heroStaggerItem : undefined}
         initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.65, delay: 0.22, ease: easePremium }}
+        transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.12, ease: easePremium }}
         className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
       >
-        <Link to="/projects" id="hero-projects-btn" className="btn-primary">
-          View Projects
-          <ArrowRight className="w-4 h-4" />
+        <Link
+          to="/projects"
+          id="hero-projects-btn"
+          className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/90 bg-white px-6 text-sm font-medium text-[#050505] shadow-[0_14px_36px_rgba(255,255,255,0.08)] transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-[0_18px_44px_rgba(255,255,255,0.12)]"
+        >
+          Explore Work
+          <ArrowRight className="h-4 w-4 transition-transform duration-[240ms] group-hover:translate-x-0.5" />
         </Link>
       </motion.div>
     </>
   );
 
   return (
-    <section
+    <motion.section
       id="hero"
-      className="relative min-h-[85vh] sm:min-h-[88vh] flex flex-col justify-center section-page !pt-8 sm:!pt-12"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.26, ease: easePremium }}
+      className="relative min-h-[86vh] sm:min-h-[88vh] flex flex-col justify-center section-page !pt-14 sm:!pt-[4.5rem] lg:!pt-20"
     >
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 xl:gap-24 items-center">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-12 xl:gap-16 items-center">
         {playHeroEntrance ? (
           <motion.div
-            className="lg:col-span-7 flex flex-col items-start gap-10 sm:gap-12 lg:gap-14 text-left"
+            className="lg:col-span-7 xl:col-span-7 flex flex-col items-start gap-8 sm:gap-9 lg:gap-10 text-left"
             variants={heroStaggerContainer}
             initial="hidden"
             animate="show"
@@ -98,7 +108,7 @@ export default function HeroPage() {
             {leftContent}
           </motion.div>
         ) : (
-          <div className="lg:col-span-7 flex flex-col items-start gap-10 sm:gap-12 lg:gap-14 text-left">
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col items-start gap-8 sm:gap-9 lg:gap-10 text-left">
             {leftContent}
           </div>
         )}
@@ -108,15 +118,15 @@ export default function HeroPage() {
             variants={heroStaggerItem}
             initial="hidden"
             animate="show"
-            className="lg:col-span-5 flex items-center justify-center lg:justify-end mt-6 lg:mt-0"
+            className="lg:col-span-5 xl:col-span-5 flex items-center justify-center lg:justify-start mt-4 lg:mt-0"
           >
-            <div className="scale-[0.65] origin-center">
+            <div className="scale-[0.68] sm:scale-[0.72] lg:scale-[0.78] xl:scale-[0.82] origin-center">
               <DeveloperCard />
             </div>
           </motion.div>
         ) : (
-          <Reveal className="lg:col-span-5 flex items-center justify-center lg:justify-end mt-6 lg:mt-0" delay={0.15}>
-            <div className="scale-[0.65] origin-center">
+          <Reveal className="lg:col-span-5 xl:col-span-5 flex items-center justify-center lg:justify-start mt-4 lg:mt-0" delay={0.15}>
+            <div className="scale-[0.68] sm:scale-[0.72] lg:scale-[0.78] xl:scale-[0.82] origin-center">
               <DeveloperCard />
             </div>
           </Reveal>
@@ -154,17 +164,26 @@ export default function HeroPage() {
 
       <Link
         to="/about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
+        aria-label="Scroll to about section"
       >
-        <span className="text-[9px] font-mono uppercase tracking-[0.2em]">Explore</span>
+        <span className="h-8 w-px overflow-hidden rounded-full bg-white/[0.08]">
+          <motion.span
+            className="block h-3 w-px rounded-full bg-gradient-to-b from-white/80 to-violet-300/70"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 8 }}
+            transition={{ duration: 0.28, ease: easePremium }}
+          />
+        </span>
         <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-5 h-8 border border-[#222222] rounded-full flex justify-center pt-1.5"
+          initial={{ opacity: 0, y: 3 }}
+          animate={{ opacity: 0.75, y: 0 }}
+          transition={{ duration: 0.24, ease: easePremium }}
+          className="text-[9px] font-mono uppercase tracking-[0.2em]"
         >
-          <span className="w-1 h-1 bg-zinc-500 rounded-full" />
+          Explore
         </motion.div>
       </Link>
-    </section>
+    </motion.section>
   );
 }

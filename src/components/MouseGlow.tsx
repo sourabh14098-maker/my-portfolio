@@ -31,8 +31,8 @@ export default function MouseGlow() {
       style={{ x, y, translateX: '-50%', translateY: '-50%' }}
       aria-hidden
     >
-      <div className="w-[420px] h-[420px] rounded-full bg-white/[0.025] blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#3b82f6]/[0.04] blur-[48px]" />
+      <div className="w-[420px] h-[420px] rounded-full bg-white/[0.018] blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-[#3b82f6]/[0.028] blur-[48px]" />
     </motion.div>
   );
 }

@@ -8,6 +8,7 @@ interface RevealProps {
   delay?: number;
   direction?: 'up' | 'down' | 'none';
   once?: boolean;
+  key?: React.Key;
 }
 
 const offsets = {
@@ -30,7 +31,7 @@ export default function Reveal({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.55, delay, ease: easePremium },
+      transition: { duration: 0.28, delay, ease: easePremium },
     },
   };
 

@@ -7,20 +7,20 @@ export default function DeveloperCard() {
       {/* Sleek backlight glow - inspired by Linear's glowing border backgrounds */}
       <div
         id="developer-card-backlight"
-        className="absolute -inset-1 rounded-[32px] bg-white/[0.02] opacity-0 group-hover/card:opacity-100 blur-xl transition-all duration-700 z-0"
+        className="absolute -inset-1 rounded-[32px] bg-white/[0.02] opacity-0 group-hover/card:opacity-100 blur-xl transition-all duration-[280ms] z-0"
       />
       
       {/* Subtle secondary colored glow */}
       <div
         id="developer-card-color-glow"
-        className="absolute inset-10 rounded-full bg-white/[0.03] opacity-40 group-hover/card:opacity-60 blur-2xl transition-all duration-700 z-0 pointer-events-none"
+        className="absolute inset-10 rounded-full bg-white/[0.03] opacity-40 group-hover/card:opacity-60 blur-2xl transition-all duration-[280ms] z-0 pointer-events-none"
       />
 
       {/* Main card body with precise bordered minimalism */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         id="developer-portrait-card"
         className="relative z-10 w-full max-w-[340px] rounded-2xl border border-[#1a1a1a] bg-[#050505] p-6 flex flex-col gap-6 text-center select-none overflow-hidden premium-card will-change-transform"
       >
@@ -44,12 +44,12 @@ export default function DeveloperCard() {
 
         {/* Profile photo container with supreme minimalist styling */}
         <div className="relative mx-auto mt-1">
-          <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 opacity-40 group-hover/card:opacity-80 transition-all duration-500 pointer-events-none" />
+          <div className="absolute -inset-0.5 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 opacity-40 group-hover/card:opacity-80 transition-all duration-[280ms] pointer-events-none" />
           <div className="relative w-28 h-28 rounded-full overflow-hidden border border-[#222222] p-1 bg-black">
             <img
               src="/src/assets/images/developer_profile_1780135085736.png"
               alt="NYXO professional developer portrait"
-              className="w-full h-full object-cover rounded-full z-10 grayscale-[15%] hover:grayscale-0 hover:scale-[1.03] duration-500 ease-out transition-all pointer-events-none"
+              className="w-full h-full object-cover rounded-full z-10 grayscale-[15%] hover:grayscale-0 hover:scale-[1.03] duration-[280ms] ease-out transition-all pointer-events-none"
               referrerPolicy="no-referrer"
             />
           </div>

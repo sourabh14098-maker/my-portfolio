@@ -36,30 +36,30 @@ export const skillsData: SkillCategory[] = [
   {
     category: 'Frontend',
     skills: [
-      { name: 'HTML' },
-      { name: 'CSS' },
-      { name: 'JavaScript' },
-      { name: 'React' },
-      { name: 'Next.js' },
-      { name: 'Tailwind' },
+      { name: 'HTML', level: 90 },
+      { name: 'CSS', level: 88 },
+      { name: 'JavaScript', level: 82 },
+      { name: 'React', level: 78 },
+      { name: 'Next.js', level: 70 },
+      { name: 'Tailwind', level: 84 },
     ],
   },
   {
     category: 'Backend',
-    skills: [{ name: 'Node.js' }, { name: 'Express' }],
+    skills: [{ name: 'Node.js', level: 68 }, { name: 'Express', level: 64 }],
   },
   {
     category: 'Database',
-    skills: [{ name: 'MongoDB' }],
+    skills: [{ name: 'MongoDB', level: 66 }],
   },
   {
     category: 'Tools',
     skills: [
-      { name: 'Git' },
-      { name: 'GitHub' },
-      { name: 'VS Code' },
-      { name: 'Postman' },
-      { name: 'Netlify' },
+      { name: 'Git', level: 76 },
+      { name: 'GitHub', level: 78 },
+      { name: 'VS Code', level: 88 },
+      { name: 'Postman', level: 62 },
+      { name: 'Netlify', level: 72 },
     ],
   },
 ];

@@ -4,6 +4,7 @@ import { pageTransition } from '../lib/motion';
 
 interface PageTransitionProps {
   children: React.ReactNode;
+  key?: React.Key;
 }
 
 export default function PageTransition({ children }: PageTransitionProps) {
