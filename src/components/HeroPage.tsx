@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, FileText } from 'lucide-react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import DeveloperCard from './DeveloperCard';
 import Reveal from './ui/Reveal';
 import { useIntro } from '../context/IntroContext';
@@ -28,7 +28,6 @@ const heroStaggerItem = {
 };
 
 export default function HeroPage() {
-  const { triggerResumeDownload } = useOutletContext<{ triggerResumeDownload: () => void }>();
   const { playHeroEntrance } = useIntro();
 
   const leftContent = (
@@ -79,15 +78,6 @@ export default function HeroPage() {
           View Projects
           <ArrowRight className="w-4 h-4" />
         </Link>
-        <button
-          type="button"
-          onClick={triggerResumeDownload}
-          id="hero-resume-btn"
-          className="btn-secondary cursor-pointer"
-        >
-          <FileText className="w-4 h-4" />
-          Download Resume
-        </button>
       </motion.div>
     </>
   );

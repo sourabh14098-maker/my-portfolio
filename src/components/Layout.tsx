@@ -21,10 +21,6 @@ export default function Layout() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const triggerResumeDownload = () => {
-    alert('Resume download triggered!\nNYXO_Resume.pdf would be fetched directly.');
-  };
-
   return (
     <div className="relative min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden">
       <MouseGlow />
@@ -32,12 +28,12 @@ export default function Layout() {
       <div className="fixed inset-0 bg-grid opacity-[0.35] pointer-events-none z-0" />
       <div className="fixed inset-0 bg-dot-grid opacity-[0.2] pointer-events-none z-0" />
 
-      <Navbar triggerResumeDownload={triggerResumeDownload} />
+      <Navbar />
 
       <main className="relative z-20 pt-20 sm:pt-24 min-h-[calc(100vh-200px)]">
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>
-            <Outlet context={{ triggerResumeDownload }} />
+            <Outlet />
           </PageTransition>
         </AnimatePresence>
       </main>

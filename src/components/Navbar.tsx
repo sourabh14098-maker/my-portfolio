@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, FileText } from 'lucide-react';
-
-interface NavbarProps {
-  triggerResumeDownload: () => void;
-}
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: 'About', path: '/about' },
@@ -14,7 +10,7 @@ const navLinks = [
   { name: 'Contact', path: '/contact' },
 ];
 
-export default function Navbar({ triggerResumeDownload }: NavbarProps) {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -35,20 +31,24 @@ export default function Navbar({ triggerResumeDownload }: NavbarProps) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+    <header className="sticky top-0 left-0 right-0 z-50 pt-4">
+      <div className="mx-auto w-[92%] lg:w-[70%]">
         <nav
-          className={`rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-500 ${
+          className={`relative h-[70px] rounded-full px-5 sm:px-7 flex items-center justify-between border border-white/[0.08] bg-black/55 backdrop-blur-2xl transition-all duration-500 ${
             scrolled
-              ? 'glass-panel bg-[#0a0a0a]/90 shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
-              : 'border border-transparent bg-transparent'
+              ? 'shadow-[0_18px_60px_rgba(0,0,0,0.42)] bg-black/70 border-white/[0.12]'
+              : 'shadow-[0_10px_34px_rgba(0,0,0,0.22)]'
           }`}
         >
-          <Link to="/" id="nav-logo" className="font-display font-semibold text-base sm:text-lg tracking-[0.2em] text-white premium-hover">
+          <Link
+            to="/"
+            id="nav-logo"
+            className="z-10 w-24 font-display text-base sm:text-lg font-semibold tracking-[0.22em] text-white transition-opacity duration-300 hover:opacity-75"
+          >
             NYXO
           </Link>
 
-          <div className="hidden lg:flex items-center gap-0.5 relative">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.025] p-1">
             {navLinks.map((link) => {
               const active = isActive(link.path);
               return (
@@ -56,15 +56,15 @@ export default function Navbar({ triggerResumeDownload }: NavbarProps) {
                   key={link.path}
                   to={link.path}
                   id={`nav-link-${link.name.toLowerCase()}`}
-                  className={`relative px-4 py-2 rounded-full text-xs font-medium transition-colors duration-300 ${
+                  className={`relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.035em] transition-colors duration-300 ${
                     active ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="navActiveIndicator"
-                      className="absolute inset-0 rounded-full bg-[#111111] border border-[#222222]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      className="absolute inset-0 rounded-full border border-white/[0.08] bg-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
@@ -73,27 +73,17 @@ export default function Navbar({ triggerResumeDownload }: NavbarProps) {
             })}
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              type="button"
-              onClick={triggerResumeDownload}
-              id="header-resume-btn"
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium text-zinc-300 border border-[#222222] bg-[#0a0a0a] hover:text-white hover:border-[#333333] premium-hover cursor-pointer"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              Resume
-            </button>
+          <div className="hidden w-24 lg:block" aria-hidden="true" />
 
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              id="mobile-menu-trigger"
-              className="lg:hidden w-9 h-9 rounded-full bg-[#0a0a0a] border border-[#222222] flex items-center justify-center text-zinc-400 hover:text-white premium-hover"
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-            >
-              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            id="mobile-menu-trigger"
+            className="z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-400 transition-all duration-300 hover:border-white/[0.14] hover:bg-white/[0.08] hover:text-white lg:hidden"
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          >
+            {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </nav>
       </div>
 
@@ -104,35 +94,26 @@ export default function Navbar({ triggerResumeDownload }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:hidden absolute top-[4.25rem] left-4 right-4 sm:left-6 sm:right-6 z-40"
+            className="absolute left-1/2 top-[5.75rem] z-40 w-[92%] -translate-x-1/2 lg:hidden"
           >
-            <div className="glass-panel rounded-2xl p-4 flex flex-col gap-1 border-[#222222]">
+            <div className="flex flex-col gap-1 rounded-[28px] border border-white/[0.08] bg-black/75 p-3 shadow-[0_18px_60px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 return (
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                      active ? 'text-white bg-[#111111]' : 'text-zinc-500 hover:text-white hover:bg-[#0a0a0a]'
+                    className={`relative rounded-2xl px-4 py-3 text-sm font-medium tracking-[0.03em] transition-colors ${
+                      active ? 'bg-white/[0.08] text-white' : 'text-zinc-500 hover:bg-white/[0.04] hover:text-white'
                     }`}
                   >
                     {link.name}
                     {active && (
-                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-[#3b82f6] rounded-full" />
+                      <span className="absolute left-2 top-1/2 h-5 w-px -translate-y-1/2 rounded-full bg-white/45" />
                     )}
                   </Link>
                 );
               })}
-              <div className="h-px bg-[#222222] my-2" />
-              <button
-                type="button"
-                onClick={triggerResumeDownload}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-white border border-[#222222] bg-[#0a0a0a] premium-hover cursor-pointer"
-              >
-                <FileText className="w-4 h-4" />
-                Download Resume
-              </button>
             </div>
           </motion.div>
         )}

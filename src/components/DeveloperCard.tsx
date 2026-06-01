@@ -31,7 +31,7 @@ export default function DeveloperCard() {
         <div className="flex items-center justify-between text-[10px] font-mono tracking-wider text-zinc-500 pb-3 border-b border-[#161616]">
           <span className="flex items-center gap-1.5 font-medium text-zinc-400">
             <Code className="w-3.5 h-3.5 text-zinc-400" />
-            NYXO // RESUME
+            NYXO // PROFILE
           </span>
           <span className="flex items-center gap-1 text-zinc-400">
             <span className="relative flex h-1.5 w-1.5">
