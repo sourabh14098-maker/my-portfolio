@@ -32,63 +32,68 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 pt-4">
-      <div className="mx-auto w-[92%] max-w-7xl px-5 sm:px-6 lg:px-8">
-        <nav
-          className={`relative h-[70px] w-full lg:w-[56%] rounded-full px-5 sm:px-7 flex items-center justify-between border border-white/[0.08] bg-black/60 backdrop-blur-2xl transition-all duration-[260ms] ${
-            scrolled
-              ? 'shadow-[0_18px_60px_rgba(0,0,0,0.42)] bg-black/72 border-white/[0.12]'
-              : 'shadow-[0_10px_34px_rgba(0,0,0,0.22)]'
-          }`}
+    <header className="sticky top-0 left-0 right-0 z-50 pt-4 sm:pt-6 px-4">
+      <nav
+        className={`mx-auto flex h-[70px] w-full max-w-[95%] md:max-w-[75%] lg:max-w-[800px] items-center justify-between rounded-full border border-[rgba(255,255,255,0.08)] bg-black/40 px-4 sm:px-6 backdrop-blur-xl transition-all duration-300 ${
+          scrolled ? 'shadow-[0_10px_40px_rgba(0,0,0,0.6)] border-[rgba(255,255,255,0.12)] bg-black/60' : 'shadow-none'
+        }`}
+      >
+        {/* Logo */}
+        <Link
+          to="/"
+          id="nav-logo"
+          className="z-10 w-24 font-display text-lg font-bold tracking-[0.15em] text-white transition-opacity hover:opacity-80 flex items-center"
         >
-          <Link
-            to="/"
-            id="nav-logo"
-            className={`z-10 w-24 rounded-full px-3 py-2 font-display text-base sm:text-lg font-semibold tracking-[0.22em] text-white transition-all duration-[240ms] hover:opacity-80 ${
-              homeActive ? 'bg-white/[0.07] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]' : ''
-            }`}
-          >
-            NYXO
-          </Link>
+          NYXO
+        </Link>
 
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-white/[0.06] bg-white/[0.025] p-1">
-            {navLinks.map((link) => {
-              const active = isActive(link.path);
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  id={`nav-link-${link.name.toLowerCase()}`}
-                  className={`relative rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.035em] transition-all duration-[240ms] ${
-                    active ? 'text-white' : 'text-zinc-500 hover:text-zinc-200 hover:bg-white/[0.035]'
-                  }`}
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="navActiveIndicator"
-                      className="absolute inset-0 rounded-full border border-white/[0.16] bg-white/[0.14] shadow-[0_8px_24px_rgba(255,255,255,0.05),inset_0_1px_0_rgba(255,255,255,0.14)]"
-                      transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-                    />
-                  )}
-                  <span className="relative z-10">{link.name}</span>
-                </Link>
-              );
-            })}
+        {/* Desktop Links (Centered) */}
+        <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full p-1.5">
+          {navLinks.map((link) => {
+            const active = isActive(link.path);
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                id={`nav-link-${link.name.toLowerCase()}`}
+                className={`relative rounded-full px-5 py-2 text-[13px] font-medium tracking-wide transition-colors duration-300 ${
+                  active ? 'text-[#050505]' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="navActiveIndicator"
+                    className="absolute inset-0 rounded-full bg-white shadow-[0_2px_10px_rgba(255,255,255,0.2)]"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{link.name}</span>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Status Dot / Mobile Menu Trigger */}
+        <div className="z-10 flex w-24 justify-end items-center">
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.02]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">Available</span>
           </div>
-
-          <div className="hidden w-24 lg:block" aria-hidden="true" />
 
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             id="mobile-menu-trigger"
-            className="z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.04] text-zinc-400 transition-all duration-[240ms] hover:border-white/[0.14] hover:bg-white/[0.08] hover:text-white lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(255,255,255,0.08)] bg-white/[0.04] text-zinc-400 transition-colors hover:border-[rgba(255,255,255,0.15)] hover:bg-white/[0.08] hover:text-white lg:hidden"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
-        </nav>
-      </div>
+        </div>
+      </nav>
 
       <AnimatePresence>
         {mobileMenuOpen && (

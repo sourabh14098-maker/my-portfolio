@@ -18,56 +18,60 @@ export default function ProjectsPage() {
           description="Projects built with focus on detail, clean code, and intuitive user experience."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {projectsData.map((project, index) => (
-            <Reveal key={project.id} delay={index * 0.06}>
-              <motion.article
-                whileHover={{ y: -3 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                className="premium-card rounded-2xl overflow-hidden flex flex-col h-full group"
-              >
-                <div className="relative h-44 sm:h-48 overflow-hidden border-b border-[#1a1a1a]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-[400ms] ease group-hover:scale-[1.03]"
-                  />
-                  <span className="absolute top-4 left-4 px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider text-zinc-400 bg-[#050505]/90 border border-[#222222] rounded-full">
-                    {project.subtitle}
-                  </span>
-                </div>
-
-                <div className="p-6 flex flex-col flex-1 text-left">
-                  <h3 className="text-lg font-display font-medium text-white mb-2 group-hover:text-zinc-200 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-500 text-sm line-clamp-3 leading-relaxed mb-5 flex-1">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.tags.slice(0, 4).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-mono text-zinc-500 px-2 py-0.5 rounded-md border border-[#1a1a1a]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
+          {projectsData.map((project, index) => {
+            const isFeatured = index % 3 === 0;
+            return (
+              <Reveal key={project.id} delay={index * 0.06} className={`md:col-span-12 ${isFeatured ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
+                <motion.article
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  className="premium-card rounded-3xl overflow-hidden flex flex-col h-full group"
+                >
+                  <div className={`relative ${isFeatured ? 'h-64 sm:h-80' : 'h-52 sm:h-60'} overflow-hidden border-b border-[rgba(255,255,255,0.05)]`}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-60" />
+                    <span className="absolute top-5 left-5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-300 bg-black/40 backdrop-blur-md border border-white/10 rounded-full">
+                      {project.subtitle}
+                    </span>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProject(project)}
-                    id={`case-study-trigger-${project.id}`}
-                    className="btn-secondary !w-full !text-xs !py-2.5 cursor-pointer"
-                  >
-                    View case study
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </motion.article>
-            </Reveal>
-          ))}
+
+                  <div className="p-6 sm:p-8 flex flex-col flex-1 text-left relative z-10">
+                    <h3 className={`font-display font-semibold text-white mb-3 group-hover:text-accent transition-colors ${isFeatured ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>
+                      {project.title}
+                    </h3>
+                    <p className={`text-zinc-400 leading-relaxed mb-6 flex-1 ${isFeatured ? 'text-base sm:text-lg' : 'text-sm'}`}>
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {project.tags.slice(0, isFeatured ? 5 : 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[11px] font-mono text-zinc-400 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.05]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProject(project)}
+                      id={`case-study-trigger-${project.id}`}
+                      className="btn-secondary !w-full !justify-between !px-6"
+                    >
+                      <span>Explore Project</span>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </div>
+                </motion.article>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
 

@@ -123,22 +123,16 @@ export default function SkillsPage() {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="flex flex-wrap gap-3">
                     {categoryObj.skills.map((skill) => (
                       <div
                         key={skill.name}
-                        className="rounded-xl border border-[#1a1a1a] bg-[#050505] p-3 flex flex-col gap-3 premium-hover hover:bg-[#080808]"
+                        className="flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] premium-hover hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.1)] group"
                       >
-                        <div className="p-2 rounded-lg border border-[#1a1a1a] w-fit">{getTechIcon(skill.name)}</div>
-                        <div>
-                          <p className="text-xs font-medium text-zinc-300">{skill.name}</p>
-                          <div className="mt-2 h-0.5 bg-[#1a1a1a] rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-zinc-600 rounded-full transition-all duration-700"
-                              style={{ width: `${skill.level}%` }}
-                            />
-                          </div>
+                        <div className="p-1.5 rounded-md border border-[rgba(255,255,255,0.04)] bg-black/40 group-hover:bg-black transition-colors">
+                          {getTechIcon(skill.name)}
                         </div>
+                        <span className="text-[13px] font-medium text-zinc-300 group-hover:text-white transition-colors">{skill.name}</span>
                       </div>
                     ))}
                   </div>

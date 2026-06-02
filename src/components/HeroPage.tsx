@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import DeveloperCard from './DeveloperCard';
 import Reveal from './ui/Reveal';
 import { useIntro } from '../context/IntroContext';
 import { easePremium } from '../lib/motion';
@@ -32,17 +31,17 @@ export default function HeroPage() {
 
   const leftContent = (
     <>
-      <div className="flex max-w-[680px] flex-col gap-6 sm:gap-7 lg:gap-8">
+      <div className="flex max-w-[800px] flex-col items-center text-center gap-6 sm:gap-7 lg:gap-8">
         <motion.h1
           variants={playHeroEntrance ? heroStaggerItem : undefined}
           initial={playHeroEntrance ? undefined : { opacity: 0, y: 20 }}
           animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
           transition={playHeroEntrance ? undefined : { duration: 0.28, ease: easePremium }}
           id="main-hero-title"
-          className="max-w-[760px] text-4xl sm:text-5xl md:text-6xl lg:text-[3.55rem] xl:text-[4.05rem] font-display font-medium tracking-normal text-white leading-[0.98] sm:leading-[1.01]"
+          className="max-w-[860px] text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem] font-display font-extrabold tracking-tight text-white leading-[0.9] sm:leading-[0.95]"
         >
           <span className="block text-white">Building Modern</span>
-          <span className="block bg-gradient-to-r from-white via-zinc-300 to-violet-300 bg-clip-text text-transparent">
+          <span className="block text-gradient-accent pb-2">
             Digital Experiences
           </span>
         </motion.h1>
@@ -52,7 +51,7 @@ export default function HeroPage() {
           initial={playHeroEntrance ? undefined : { opacity: 0, y: 12 }}
           animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
           transition={playHeroEntrance ? undefined : { duration: 0.24, delay: 0.04, ease: easePremium }}
-          className="max-w-[620px] text-zinc-400 font-mono text-[11px] sm:text-xs tracking-[0.13em] uppercase font-medium leading-relaxed"
+          className="max-w-[620px] text-zinc-400 font-mono text-[11px] sm:text-xs tracking-[0.15em] uppercase font-medium leading-relaxed"
         >
           Computer Science Student / Frontend Developer / Full Stack Learner
         </motion.p>
@@ -64,7 +63,7 @@ export default function HeroPage() {
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
         transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.08, ease: easePremium }}
         id="hero-desc"
-        className="max-w-[560px] text-sm md:text-base text-zinc-400/90 leading-7"
+        className="max-w-[560px] text-sm md:text-base text-zinc-400/90 leading-7 mx-auto"
       >
         Passionate about creating modern web applications, solving real-world problems, and building
         products that make an impact.
@@ -75,15 +74,21 @@ export default function HeroPage() {
         initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
         transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.12, ease: easePremium }}
-        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
+        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
       >
         <Link
           to="/projects"
           id="hero-projects-btn"
-          className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/90 bg-white px-6 text-sm font-medium text-[#050505] shadow-[0_14px_36px_rgba(255,255,255,0.08)] transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-[0_18px_44px_rgba(255,255,255,0.12)]"
+          className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-white/90 bg-white px-8 text-sm font-semibold text-[#050505] shadow-[0_14px_36px_rgba(255,255,255,0.08)] transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-[0_18px_44px_rgba(255,255,255,0.12)]"
         >
           Explore Work
           <ArrowRight className="h-4 w-4 transition-transform duration-[240ms] group-hover:translate-x-0.5" />
+        </Link>
+        <Link
+          to="/about"
+          className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-8 text-sm font-medium text-white transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-[rgba(255,255,255,0.06)] backdrop-blur-md"
+        >
+          About Me
         </Link>
       </motion.div>
     </>
@@ -95,12 +100,16 @@ export default function HeroPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.26, ease: easePremium }}
-      className="relative min-h-[86vh] sm:min-h-[88vh] flex flex-col justify-center section-page !pt-14 sm:!pt-[4.5rem] lg:!pt-20"
+      className="relative min-h-[90vh] flex flex-col justify-center section-page !pt-20 sm:!pt-28"
     >
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-12 xl:gap-16 items-center">
+      {/* Massive Glowing Orbs for the dramatic Apple/Vercel effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] max-w-[800px] rounded-[100%] bg-indigo-600/15 blur-[120px] pointer-events-none z-0 mt-[-10vh]" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] max-w-[600px] rounded-[100%] bg-violet-600/15 blur-[100px] pointer-events-none z-0" />
+
+      <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center relative z-10 gap-8 lg:gap-12">
         {playHeroEntrance ? (
           <motion.div
-            className="lg:col-span-7 xl:col-span-7 flex flex-col items-start gap-8 sm:gap-9 lg:gap-10 text-left"
+            className="flex flex-col items-center gap-6 sm:gap-8"
             variants={heroStaggerContainer}
             initial="hidden"
             animate="show"
@@ -108,28 +117,9 @@ export default function HeroPage() {
             {leftContent}
           </motion.div>
         ) : (
-          <div className="lg:col-span-7 xl:col-span-7 flex flex-col items-start gap-8 sm:gap-9 lg:gap-10 text-left">
+          <div className="flex flex-col items-center gap-6 sm:gap-8">
             {leftContent}
           </div>
-        )}
-
-        {playHeroEntrance ? (
-          <motion.div
-            variants={heroStaggerItem}
-            initial="hidden"
-            animate="show"
-            className="lg:col-span-5 xl:col-span-5 flex items-center justify-center lg:justify-start mt-4 lg:mt-0"
-          >
-            <div className="scale-[0.68] sm:scale-[0.72] lg:scale-[0.78] xl:scale-[0.82] origin-center">
-              <DeveloperCard />
-            </div>
-          </motion.div>
-        ) : (
-          <Reveal className="lg:col-span-5 xl:col-span-5 flex items-center justify-center lg:justify-start mt-4 lg:mt-0" delay={0.15}>
-            <div className="scale-[0.68] sm:scale-[0.72] lg:scale-[0.78] xl:scale-[0.82] origin-center">
-              <DeveloperCard />
-            </div>
-          </Reveal>
         )}
       </div>
 
