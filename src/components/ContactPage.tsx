@@ -36,15 +36,45 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
-
-  const handleContactSubmit = (e: FormEvent) => {
+  const handleContactSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setFormLoading(true);
-    setTimeout(() => {
+
+    try {
+      setFormLoading(true);
+
+      const response = await fetch(
+        "http://localhost:5000/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormSubmitted(true);
+
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Failed to send message");
+    } finally {
       setFormLoading(false);
-      setFormSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1500);
+    }
   };
 
   return (
