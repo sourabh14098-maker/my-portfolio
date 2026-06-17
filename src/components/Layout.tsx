@@ -25,12 +25,9 @@ export default function Layout() {
     <div className="relative min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden">
       <MouseGlow />
 
-      <div className="fixed inset-0 bg-grid opacity-[0.35] pointer-events-none z-0" />
-      <div className="fixed inset-0 bg-dot-grid opacity-[0.2] pointer-events-none z-0" />
-
       <Navbar />
 
-      <main className="relative z-20 pt-20 sm:pt-24 min-h-[calc(100vh-200px)]">
+      <main className="relative z-20 min-h-[calc(100vh-200px)]">
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>
             <Outlet />
@@ -49,7 +46,7 @@ export default function Layout() {
             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             id="floating-scroll-top"
-            className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-[#0a0a0a] border border-[#222222] text-zinc-400 hover:text-white flex items-center justify-center backdrop-blur-md cursor-pointer premium-hover"
+            className="fixed bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-white/[0.05] border border-white/10 text-zinc-400 hover:text-white hover:bg-white/[0.1] hover:border-white/20 flex items-center justify-center backdrop-blur-md cursor-pointer transition-all duration-300"
             title="Scroll to Top"
             type="button"
           >

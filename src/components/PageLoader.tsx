@@ -60,42 +60,12 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
     >
       <IntroParticles />
 
-      <div className="absolute inset-0 bg-grid opacity-[0.03] pointer-events-none" />
 
-      {/* Subtle vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#050505_72%)] pointer-events-none" />
 
       <div className="relative flex flex-col items-center justify-center gap-10 px-6">
         {/* Logo cluster */}
         <div className="relative flex items-center justify-center">
-          {/* White + minimal blue glow */}
-          <motion.div
-            className="absolute rounded-full pointer-events-none"
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{
-              opacity: showGlow ? 1 : 0,
-              scale: showGlow ? 1.15 : 0.6,
-            }}
-            transition={{ duration: 0.65, ease: easePremium }}
-            style={{
-              width: 'min(72vw, 280px)',
-              height: 'min(72vw, 280px)',
-              background:
-                'radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(59,130,246,0.06) 35%, transparent 70%)',
-              filter: 'blur(28px)',
-            }}
-          />
 
-          <motion.div
-            className="absolute rounded-full bg-white/[0.04] blur-2xl pointer-events-none"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: showGlow ? 0.9 : 0,
-              scale: showGlow ? 1 : 0.8,
-            }}
-            transition={{ duration: 0.55, ease: easePremium }}
-            style={{ width: 160, height: 160 }}
-          />
 
           <div className="relative flex items-center font-display font-semibold text-5xl sm:text-6xl md:text-7xl tracking-[0.32em] sm:tracking-[0.35em] pl-[0.32em] sm:pl-[0.35em] text-white">
             {LETTERS.map((letter, index) => (

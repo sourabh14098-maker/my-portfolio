@@ -1,95 +1,119 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Download, Code2, FolderKanban, Users, Star, Mouse } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Reveal from './ui/Reveal';
 import { useIntro } from '../context/IntroContext';
 import { easePremium } from '../lib/motion';
+import heroImage from '../assets/images/hero_workspace.png';
 
 const heroStaggerContainer = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.04,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     },
   },
 };
 
 const heroStaggerItem = {
-  hidden: { opacity: 0, y: 16, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
   show: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.28, ease: easePremium },
+    transition: { duration: 0.5, ease: easePremium },
   },
 };
+
+const stats = [
+  { icon: Code2, metric: '2+', label: 'Years of Experience' },
+  { icon: FolderKanban, metric: '20+', label: 'Projects Completed' },
+  { icon: Users, metric: '15+', label: 'Happy Clients' },
+  { icon: Star, metric: '5★', label: 'Client Ratings' },
+];
 
 export default function HeroPage() {
   const { playHeroEntrance } = useIntro();
 
   const leftContent = (
     <>
-      <div className="flex max-w-[800px] flex-col items-center text-center gap-6 sm:gap-7 lg:gap-8">
-        <motion.h1
-          variants={playHeroEntrance ? heroStaggerItem : undefined}
-          initial={playHeroEntrance ? undefined : { opacity: 0, y: 20 }}
-          animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-          transition={playHeroEntrance ? undefined : { duration: 0.28, ease: easePremium }}
-          id="main-hero-title"
-          className="max-w-[860px] text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem] font-display font-extrabold tracking-tight text-white leading-[0.9] sm:leading-[0.95]"
-        >
-          <span className="block text-white">Building Modern</span>
-          <span className="block text-gradient-accent pb-2">
-            Digital Experiences
-          </span>
-        </motion.h1>
-
-        <motion.p
-          variants={playHeroEntrance ? heroStaggerItem : undefined}
-          initial={playHeroEntrance ? undefined : { opacity: 0, y: 12 }}
-          animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-          transition={playHeroEntrance ? undefined : { duration: 0.24, delay: 0.04, ease: easePremium }}
-          className="max-w-[620px] text-zinc-400 font-mono text-[11px] sm:text-xs tracking-[0.15em] uppercase font-medium leading-relaxed"
-        >
-          Computer Science Student / Frontend Developer / Full Stack Learner
-        </motion.p>
-      </div>
-
-      <motion.p
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.08, ease: easePremium }}
-        id="hero-desc"
-        className="max-w-[560px] text-sm md:text-base text-zinc-400/90 leading-7 mx-auto"
-      >
-        Passionate about creating modern web applications, solving real-world problems, and building
-        products that make an impact.
-      </motion.p>
-
+      {/* Subtitle */}
       <motion.div
         variants={playHeroEntrance ? heroStaggerItem : undefined}
         initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.26, delay: 0.12, ease: easePremium }}
-        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
+        transition={playHeroEntrance ? undefined : { duration: 0.4, ease: easePremium }}
+        className="flex items-center gap-3"
+      >
+        <span className="w-8 h-[1px] bg-zinc-600" />
+        <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-zinc-400 font-medium">
+          Founder & Software Developer
+        </span>
+      </motion.div>
+
+      {/* Main Title */}
+      <motion.h1
+        variants={playHeroEntrance ? heroStaggerItem : undefined}
+        initial={playHeroEntrance ? undefined : { opacity: 0, y: 24 }}
+        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
+        transition={playHeroEntrance ? undefined : { duration: 0.5, ease: easePremium }}
+        id="main-hero-title"
+        className="text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] font-display font-extrabold tracking-tight text-white leading-[0.85] uppercase"
+      >
+        NYXO
+      </motion.h1>
+
+      {/* Tagline */}
+      <motion.h2
+        variants={playHeroEntrance ? heroStaggerItem : undefined}
+        initial={playHeroEntrance ? undefined : { opacity: 0, y: 20 }}
+        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
+        transition={playHeroEntrance ? undefined : { duration: 0.45, ease: easePremium }}
+        className="text-2xl sm:text-3xl md:text-4xl font-display font-light text-zinc-300 tracking-tight leading-snug"
+      >
+        Crafting Digital Experiences.
+      </motion.h2>
+
+      {/* Description */}
+      <motion.p
+        variants={playHeroEntrance ? heroStaggerItem : undefined}
+        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
+        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
+        transition={playHeroEntrance ? undefined : { duration: 0.4, delay: 0.05, ease: easePremium }}
+        id="hero-desc"
+        className="max-w-[440px] text-[15px] text-zinc-500 leading-7"
+      >
+        I build modern, scalable and high-performance
+        web applications that solve real problems
+        and deliver exceptional user experiences.
+      </motion.p>
+
+      {/* CTA Buttons */}
+      <motion.div
+        variants={playHeroEntrance ? heroStaggerItem : undefined}
+        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
+        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
+        transition={playHeroEntrance ? undefined : { duration: 0.4, delay: 0.1, ease: easePremium }}
+        className="flex flex-wrap items-center gap-4 mt-2"
       >
         <Link
           to="/projects"
           id="hero-projects-btn"
-          className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-white/90 bg-white px-8 text-sm font-semibold text-[#050505] shadow-[0_14px_36px_rgba(255,255,255,0.08)] transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-zinc-200 hover:shadow-[0_18px_44px_rgba(255,255,255,0.12)]"
+          className="group inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full border border-white/20 bg-transparent px-7 text-[14px] font-medium text-white tracking-wide transition-all duration-300 hover:bg-white hover:text-black hover:border-white"
         >
-          Explore Work
-          <ArrowRight className="h-4 w-4 transition-transform duration-[240ms] group-hover:translate-x-0.5" />
+          View Projects
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
-        <Link
-          to="/about"
-          className="group inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.03)] px-8 text-sm font-medium text-white transition-all duration-[240ms] hover:-translate-y-0.5 hover:bg-[rgba(255,255,255,0.06)] backdrop-blur-md"
+        <a
+          href="/resume.pdf"
+          download
+          className="group inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-7 text-[14px] font-medium text-zinc-300 tracking-wide transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06] hover:text-white backdrop-blur-sm"
         >
-          About Me
-        </Link>
+          Download Resume
+          <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+        </a>
       </motion.div>
     </>
   );
@@ -99,81 +123,96 @@ export default function HeroPage() {
       id="hero"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.26, ease: easePremium }}
-      className="relative min-h-[90vh] flex flex-col justify-center section-page !pt-20 sm:!pt-28"
+      transition={{ duration: 0.4, ease: easePremium }}
+      className="relative min-h-screen flex flex-col"
     >
-      {/* Massive Glowing Orbs for the dramatic Apple/Vercel effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] max-w-[800px] rounded-[100%] bg-indigo-600/15 blur-[120px] pointer-events-none z-0 mt-[-10vh]" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[60vw] h-[40vh] max-w-[600px] rounded-[100%] bg-violet-600/15 blur-[100px] pointer-events-none z-0" />
-
-      <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center relative z-10 gap-8 lg:gap-12">
-        {playHeroEntrance ? (
-          <motion.div
-            className="flex flex-col items-center gap-6 sm:gap-8"
-            variants={heroStaggerContainer}
-            initial="hidden"
-            animate="show"
-          >
-            {leftContent}
-          </motion.div>
-        ) : (
-          <div className="flex flex-col items-center gap-6 sm:gap-8">
-            {leftContent}
+      {/* Hero Content — Split Layout */}
+      <div className="flex-1 flex items-center w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 pt-24 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
+          {/* Left — Text */}
+          <div className="flex flex-col gap-5 sm:gap-6">
+            {playHeroEntrance ? (
+              <motion.div
+                className="flex flex-col gap-5 sm:gap-6"
+                variants={heroStaggerContainer}
+                initial="hidden"
+                animate="show"
+              >
+                {leftContent}
+              </motion.div>
+            ) : (
+              <div className="flex flex-col gap-5 sm:gap-6">
+                {leftContent}
+              </div>
+            )}
           </div>
-        )}
+
+          {/* Right — Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: playHeroEntrance ? 0.3 : 0.1, ease: easePremium }}
+            className="relative hidden lg:block"
+          >
+            <div className="relative rounded-2xl overflow-hidden">
+              {/* Subtle vignette overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent z-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10 pointer-events-none" />
+              <img
+                src={heroImage}
+                alt="Developer workspace"
+                className="w-full h-auto object-cover rounded-2xl"
+                style={{ maxHeight: '520px' }}
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      <Reveal className="max-w-7xl mx-auto w-full mt-20 md:mt-28" delay={playHeroEntrance ? 0.45 : 0.1}>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {[
-            { metric: '2+', label: 'Projects Built', subtext: 'Deployed production web apps' },
-            { metric: '10+', label: 'Technologies Learned', subtext: 'Modern front- & backend' },
-            { metric: '100+', label: 'Hours of Coding', subtext: 'Focused build time' },
-            { label: 'Open For Internship', subtext: 'Ready to contribute' },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="premium-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between min-h-[120px]"
-            >
-              {stat.metric ? (
-                <div className="text-2xl sm:text-3xl font-display font-medium text-white tracking-tight mb-2">
-                  {stat.metric}
+      {/* Stats Bar */}
+      <Reveal className="w-full border-t border-white/[0.06]" delay={playHeroEntrance ? 0.5 : 0.15}>
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            {stats.map((stat, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4"
+              >
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/[0.08] bg-white/[0.02]">
+                  <stat.icon className="w-5 h-5 text-zinc-400" />
                 </div>
-              ) : (
-                <div className="inline-flex items-center gap-2 text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]" />
-                  Available
+                <div>
+                  <div className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight">
+                    {stat.metric}
+                  </div>
+                  <div className="text-xs text-zinc-500 font-mono tracking-wider uppercase mt-0.5">
+                    {stat.label}
+                  </div>
                 </div>
-              )}
-              <h4 className="text-sm font-medium text-zinc-300 leading-snug">{stat.label}</h4>
-              <p className="text-xs text-zinc-600 mt-2 font-mono">{stat.subtext}</p>
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
       </Reveal>
 
-      <Link
-        to="/about"
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 hover:text-zinc-400 transition-colors"
-        aria-label="Scroll to about section"
+      {/* Scroll to Explore */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: playHeroEntrance ? 0.7 : 0.3, ease: easePremium }}
+        className="flex flex-col items-center gap-3 pb-8"
       >
-        <span className="h-8 w-px overflow-hidden rounded-full bg-white/[0.08]">
-          <motion.span
-            className="block h-3 w-px rounded-full bg-gradient-to-b from-white/80 to-violet-300/70"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 8 }}
-            transition={{ duration: 0.28, ease: easePremium }}
+        <div className="w-6 h-10 rounded-full border border-white/15 flex items-start justify-center pt-2">
+          <motion.div
+            className="w-1 h-2.5 rounded-full bg-white/60"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
+        </div>
+        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-zinc-600">
+          Scroll to Explore
         </span>
-        <motion.div
-          initial={{ opacity: 0, y: 3 }}
-          animate={{ opacity: 0.75, y: 0 }}
-          transition={{ duration: 0.24, ease: easePremium }}
-          className="text-[9px] font-mono uppercase tracking-[0.2em]"
-        >
-          Explore
-        </motion.div>
-      </Link>
+      </motion.div>
     </motion.section>
   );
 }
