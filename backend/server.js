@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 const contactRoutes = require("./routes/contactRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ app.use(express.json());
 
 // Routes
 app.use("/api/contact", contactRoutes);
+app.use("/api/chat", chatRoutes);
+
+console.log("Chat Route Loaded:", typeof chatRoutes);
 
 // MongoDB Connection
 mongoose
