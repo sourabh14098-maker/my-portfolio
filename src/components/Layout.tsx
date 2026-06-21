@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import MouseGlow from './MouseGlow';
 import PageTransition from './PageTransition';
+import AIChatbot from './AIChatbot';
 
 export default function Layout() {
   const [showScrollUp, setShowScrollUp] = useState(false);
@@ -23,7 +23,6 @@ export default function Layout() {
 
   return (
     <div className="relative min-h-screen bg-[#050505] text-white font-sans overflow-x-hidden">
-      <MouseGlow />
 
       <Navbar />
 
@@ -54,6 +53,8 @@ export default function Layout() {
           </motion.button>
         )}
       </AnimatePresence>
+
+      <AIChatbot />
     </div>
   );
 }

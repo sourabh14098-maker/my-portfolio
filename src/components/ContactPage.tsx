@@ -6,10 +6,6 @@ import {
   Linkedin,
   ChevronRight,
   Check,
-  MapPin,
-  GraduationCap,
-  Briefcase,
-  Rocket,
   Clock,
 } from 'lucide-react';
 
@@ -25,12 +21,7 @@ const CONTACT_LINKS = {
 const contactCardClass =
   'premium-card rounded-xl p-4 sm:p-5 flex items-center justify-between group bg-[#050505] hover:-translate-y-0.5 active:scale-[0.99]';
 
-const professionalInfo = [
-  { icon: MapPin, label: 'India' },
-  { icon: GraduationCap, label: 'B.Tech Computer Science Student' },
-  { icon: Briefcase, label: 'Open to Internship Opportunities' },
-  { icon: Rocket, label: 'Creator of StudyHub & Modern Web Applications' },
-] as const;
+// Professional info removed
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -165,25 +156,7 @@ export default function ContactPage() {
                 <ChevronRight className="w-4 h-4 shrink-0 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 transition-all duration-200" />
               </motion.a>
 
-              {/* Professional information card */}
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4 }}
-                className="premium-card rounded-xl p-4 sm:p-5 mt-1 sm:mt-2"
-              >
-                <ul className="flex flex-col gap-3 sm:gap-3.5">
-                  {professionalInfo.map(({ icon: Icon, label }) => (
-                    <li key={label} className="flex items-start gap-3">
-                      <div className="w-8 h-8 shrink-0 rounded-lg bg-[#111111] border border-[#222222] flex items-center justify-center">
-                        <Icon className="w-3.5 h-3.5 text-zinc-500" strokeWidth={1.75} />
-                      </div>
-                      <span className="text-xs sm:text-sm text-[#d4d4d8] leading-snug pt-1">{label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+              {/* Professional info card removed */}
             </div>
           </div>
 

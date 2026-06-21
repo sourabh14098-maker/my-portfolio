@@ -28,10 +28,10 @@ const heroStaggerItem = {
 };
 
 const stats = [
-  { icon: Code2, metric: '2+', label: 'Years of Experience' },
-  { icon: FolderKanban, metric: '20+', label: 'Projects Completed' },
-  { icon: Users, metric: '15+', label: 'Happy Clients' },
-  { icon: Star, metric: '5★', label: 'Client Ratings' },
+  { icon: FolderKanban, metric: '5+', label: 'Projects Built' },
+  { icon: Code2, metric: 'Web', label: 'Developer' },
+  { icon: Code2, metric: 'Java', label: 'Developer' },
+  { icon: Code2, metric: 'AI', label: 'Projects' },
 ];
 
 export default function HeroPage() {
@@ -106,14 +106,6 @@ export default function HeroPage() {
           View Projects
           <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
-        <a
-          href="/resume.pdf"
-          download
-          className="group inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-7 text-[14px] font-medium text-zinc-300 tracking-wide transition-all duration-300 hover:border-white/25 hover:bg-white/[0.06] hover:text-white backdrop-blur-sm"
-        >
-          Download Resume
-          <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
-        </a>
       </motion.div>
     </>
   );
@@ -171,12 +163,12 @@ export default function HeroPage() {
 
       {/* Stats Bar */}
       <Reveal className="w-full border-t border-white/[0.06]" delay={playHeroEntrance ? 0.5 : 0.15}>
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-8 lg:gap-y-0 divide-x divide-white/[0.06] lg:divide-white/[0.08]">
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="flex items-center gap-4"
+                className="flex items-center gap-4 justify-center px-4"
               >
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-white/[0.08] bg-white/[0.02]">
                   <stat.icon className="w-5 h-5 text-zinc-400" />
