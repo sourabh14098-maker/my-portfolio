@@ -75,7 +75,7 @@ export const projectsData: Project[] = [
       'StudyHub is a peer-to-peer web application for students to search, upload, and download community study resources.',
     image: '/src/assets/images/studyhub_preview_1780135104255.png',
     tags: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind'],
-    liveUrl: 'https://studyhub-notes.netlify.app',
+    liveUrl: "https://dainty-bienenstitch-127b68.netlify.app",
     githubUrl: 'https://github.com/sourabh14098-maker',
     features: [],
     caseStudy: { overview: '', challenges: [], solutions: [], results: '' },
