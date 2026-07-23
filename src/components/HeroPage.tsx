@@ -6,6 +6,7 @@ import Reveal from './ui/Reveal';
 import { useIntro } from '../context/IntroContext';
 import { easePremium } from '../lib/motion';
 import heroImage from '../assets/images/hero_workspace.png';
+import MemoryBanner from "./MemoryBanner";
 
 const heroStaggerContainer = {
   hidden: {},
