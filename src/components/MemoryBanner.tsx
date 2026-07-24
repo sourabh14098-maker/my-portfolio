@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { usePortfolioMemory } from "../hooks/usePortfolioMemory";
 import { Link } from "react-router-dom";
@@ -5,9 +6,19 @@ import { Link } from "react-router-dom";
 export default function MemoryBanner() {
     const memory = usePortfolioMemory();
 
+    const [visible, setVisible] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setVisible(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     console.log(memory);
 
-    if (!memory) return null;
+    if (!memory || !visible) return null;
 
     let title = "";
     let subtitle = "";
@@ -33,7 +44,10 @@ export default function MemoryBanner() {
         <AnimatePresence>
             <motion.div
                 initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={{
+                    opacity: visible ? 1 : 0,
+                    y: visible ? 0 : -20,
+                }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.6 }}
                 className="mb-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5"
@@ -54,6 +68,7 @@ export default function MemoryBanner() {
                         {subtitle}
                     </p>
                 )}
+                {subtitle}
 
             </motion.div>
         </AnimatePresence>
