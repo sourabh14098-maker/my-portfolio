@@ -34,11 +34,10 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <nav
-        className={`flex h-[72px] w-full items-center justify-between px-8 sm:px-12 lg:px-16 transition-all duration-500 ${
-          scrolled
+        className={`flex h-[72px] w-full items-center justify-between px-8 sm:px-12 lg:px-16 transition-all duration-500 ${scrolled
             ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.06]'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         {/* Logo */}
         <Link
@@ -58,9 +57,8 @@ export default function Navbar() {
                 key={link.path}
                 to={link.path}
                 id={`nav-link-${link.name.toLowerCase()}`}
-                className={`relative text-[14px] font-normal tracking-wide transition-colors duration-300 ${
-                  active ? 'text-white' : 'text-zinc-400 hover:text-white'
-                }`}
+                className={`relative text-[14px] font-normal tracking-wide transition-colors duration-300 ${active ? 'text-white' : 'text-zinc-400 hover:text-white'
+                  }`}
               >
                 {link.name}
                 {active && (
@@ -114,9 +112,8 @@ export default function Navbar() {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`relative rounded-xl px-4 py-3 text-sm font-medium tracking-[0.03em] transition-colors duration-[240ms] ${
-                      active ? 'bg-white/[0.08] text-white' : 'text-zinc-500 hover:bg-white/[0.04] hover:text-white'
-                    }`}
+                    className={`relative rounded-xl px-4 py-3 text-sm font-medium tracking-[0.03em] transition-colors duration-[240ms] ${active ? 'bg-white/[0.08] text-white' : 'text-zinc-500 hover:bg-white/[0.04] hover:text-white'
+                      }`}
                   >
                     {link.name}
                   </Link>

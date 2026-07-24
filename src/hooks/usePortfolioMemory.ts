@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export interface PortfolioMemory {
     visits: number;
     lastVisit: string;
+    lastProject?: string;
 }
 
 export function usePortfolioMemory() {
@@ -15,6 +16,7 @@ export function usePortfolioMemory() {
             const firstVisit = {
                 visits: 1,
                 lastVisit: new Date().toLocaleDateString(),
+                lastProject: "",
             };
 
             localStorage.setItem(
@@ -39,4 +41,19 @@ export function usePortfolioMemory() {
     }, []);
 
     return memory;
+}
+
+export function saveLastProject(projectName: string) {
+    const saved = localStorage.getItem("portfolio-memory");
+
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    data.lastProject = projectName;
+
+    localStorage.setItem(
+        "portfolio-memory",
+        JSON.stringify(data)
+    );
 }

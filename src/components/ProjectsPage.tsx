@@ -5,6 +5,7 @@ import { projectsData } from '../data';
 import { Project } from '../types';
 import PageHeader from './ui/PageHeader';
 import Reveal from './ui/Reveal';
+import { saveLastProject } from "../hooks/usePortfolioMemory";
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -60,7 +61,15 @@ export default function ProjectsPage() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => setSelectedProject(project)}
+                      onClick={() => {
+                        alert(project.title);
+
+                        saveLastProject(project.title);
+
+                        alert("Saved!");
+
+                        setSelectedProject(project);
+                      }}
                       id={`case-study-trigger-${project.id}`}
                       className="btn-secondary !w-full !justify-between !px-6"
                     >

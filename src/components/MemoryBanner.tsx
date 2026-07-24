@@ -1,8 +1,11 @@
 import { motion, AnimatePresence } from "motion/react";
 import { usePortfolioMemory } from "../hooks/usePortfolioMemory";
+import { Link } from "react-router-dom";
 
 export default function MemoryBanner() {
     const memory = usePortfolioMemory();
+
+    console.log(memory);
 
     if (!memory) return null;
 
@@ -17,8 +20,14 @@ export default function MemoryBanner() {
         subtitle = "Glad to see you again.";
     } else {
         title = `👋 Welcome Back (${memory.visits} visits)`;
-        subtitle = "Your portfolio journey continues.";
+
+        if (memory.lastProject) {
+            subtitle = `Continue working on ${memory.lastProject} →`;
+        } else {
+            subtitle = "Your portfolio journey continues.";
+        }
     }
+
 
     return (
         <AnimatePresence>
@@ -33,9 +42,19 @@ export default function MemoryBanner() {
                     {title}
                 </h3>
 
-                <p className="text-gray-400 mt-2">
-                    {subtitle}
-                </p>
+                {memory.lastProject ? (
+                    <Link
+                        to="/projects"
+                        className="mt-2 inline-block text-zinc-300 hover:text-white transition-colors"
+                    >
+                        Continue working on {memory.lastProject} →
+                    </Link>
+                ) : (
+                    <p className="text-gray-400 mt-2">
+                        {subtitle}
+                    </p>
+                )}
+
             </motion.div>
         </AnimatePresence>
     );
