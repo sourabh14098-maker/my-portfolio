@@ -231,7 +231,7 @@ export default function AIChatbot() {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.92 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-20 z-50 w-14 h-14 rounded-full cursor-pointer flex items-center justify-center group"
+            className="fixed bottom-6 sm:bottom-10 right-4 sm:right-8 lg:right-20 z-50 w-14 h-14 rounded-full cursor-pointer flex items-center justify-center group transition-all duration-300"
             style={{
               background: 'rgba(10, 10, 10, 0.7)',
               backdropFilter: 'blur(24px)',
@@ -245,15 +245,15 @@ export default function AIChatbot() {
           >
             {/* Soft outer glow ring */}
             <motion.span
-              className="absolute inset-0 rounded-full pointer-events-none"
+              className="absolute inset-2 rounded-full pointer-events-none"
               style={{
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.04)',
               }}
               animate={{
                 boxShadow: [
-                  '0 0 12px rgba(255,255,255,0.03)',
-                  '0 0 24px rgba(255,255,255,0.07)',
-                  '0 0 12px rgba(255,255,255,0.03)',
+                  '0 0 8px rgba(255,255,255,0.02)',
+                  '0 0 14px rgba(255,255,255,0.04)',
+                  '0 0 8px rgba(255,255,255,0.02)',
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
@@ -261,206 +261,206 @@ export default function AIChatbot() {
             <Sparkles className="w-5 h-5 text-white/80 group-hover:text-white transition-colors duration-300" />
           </motion.button>
         )}
-      </AnimatePresence>
+      </AnimatePresence >
 
       {/* ─────── Chat Panel ─────── */}
       <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none md:pointer-events-none"
-              onClick={() => setIsOpen(false)}
-            />
+        {
+          isOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none md:pointer-events-none"
+                onClick={() => setIsOpen(false)}
+              />
 
-            {/* Panel */}
-            <motion.div
-              id="ai-chatbot-panel"
-              initial={{ x: '100%', opacity: 0.5 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '100%', opacity: 0 }}
-              transition={{ duration: 0.45, ease: easePremium }}
-              className="fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] flex flex-col pointer-events-auto"
-              style={{
-                background: 'rgba(8, 8, 8, 0.85)',
-                backdropFilter: 'blur(40px)',
-                WebkitBackdropFilter: 'blur(40px)',
-                borderLeft: '1px solid rgba(255,255,255,0.06)',
-              }}
-            >
-              {/* ── Header ── */}
-              <div
-                className="flex items-center justify-between px-6 py-5 shrink-0"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+              {/* Panel */}
+              <motion.div
+                id="ai-chatbot-panel"
+                initial={{ x: '100%', opacity: 0.5 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: '100%', opacity: 0 }}
+                transition={{ duration: 0.45, ease: easePremium }}
+                className="fixed top-0 right-0 z-50 h-full w-full sm:w-[420px] flex flex-col pointer-events-auto"
+                style={{
+                  background: 'rgba(8, 8, 8, 0.85)',
+                  backdropFilter: 'blur(40px)',
+                  WebkitBackdropFilter: 'blur(40px)',
+                  borderLeft: '1px solid rgba(255,255,255,0.06)',
+                }}
               >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                    }}
+                {/* ── Header ── */}
+                <div
+                  className="flex items-center justify-between px-6 py-5 shrink-0"
+                  style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center"
+                      style={{
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                      }}
+                    >
+                      <Sparkles className="w-4 h-4 text-white/70" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-display font-semibold text-white tracking-tight">
+                        Ask NYXO AI
+                      </h3>
+                      <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.15em]">
+                        Portfolio Guide
+                      </p>
+                    </div>
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsOpen(false)}
+                    className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-200 hover:bg-white/[0.06]"
+                    style={{ border: '1px solid rgba(255,255,255,0.06)' }}
+                    type="button"
                   >
-                    <Sparkles className="w-4 h-4 text-white/70" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-display font-semibold text-white tracking-tight">
-                      Ask NYXO AI
-                    </h3>
-                    <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.15em]">
-                      Portfolio Guide
-                    </p>
-                  </div>
+                    <X className="w-4 h-4 text-zinc-400" />
+                  </motion.button>
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setIsOpen(false)}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors duration-200 hover:bg-white/[0.06]"
-                  style={{ border: '1px solid rgba(255,255,255,0.06)' }}
-                  type="button"
-                >
-                  <X className="w-4 h-4 text-zinc-400" />
-                </motion.button>
-              </div>
-
-              {/* ── Messages ── */}
-              <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4 scrollbar-thin">
-                {messages.map((msg) => (
-                  <motion.div
-                    key={msg.id}
-                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    transition={{ duration: 0.35, ease: easePremium }}
-                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-3 text-[13px] leading-relaxed ${
-                        msg.role === 'user'
+                {/* ── Messages ── */}
+                <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4 scrollbar-thin">
+                  {messages.map((msg) => (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                      transition={{ duration: 0.35, ease: easePremium }}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div
+                        className={`max-w-[85%] rounded-2xl px-4 py-3 text-[13px] leading-relaxed ${msg.role === 'user'
                           ? 'bg-white text-black rounded-br-md'
                           : 'text-zinc-300 rounded-bl-md'
-                      }`}
-                      style={
-                        msg.role === 'assistant'
-                          ? {
+                          }`}
+                        style={
+                          msg.role === 'assistant'
+                            ? {
                               background: 'rgba(255,255,255,0.03)',
                               border: '1px solid rgba(255,255,255,0.06)',
                             }
-                          : undefined
-                      }
+                            : undefined
+                        }
+                      >
+                        {renderMarkdown(msg.content)}
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {/* Typing indicator */}
+                  {isTyping && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex justify-start"
                     >
-                      {renderMarkdown(msg.content)}
-                    </div>
-                  </motion.div>
-                ))}
-
-                {/* Typing indicator */}
-                {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex justify-start"
-                  >
-                    <div
-                      className="rounded-2xl rounded-bl-md"
-                      style={{
-                        background: 'rgba(255,255,255,0.03)',
-                        border: '1px solid rgba(255,255,255,0.06)',
-                      }}
-                    >
-                      <TypingIndicator />
-                    </div>
-                  </motion.div>
-                )}
-
-                <div ref={messagesEndRef} />
-              </div>
-
-              {/* ── Suggestion Chips ── */}
-              <AnimatePresence>
-                {showSuggestions && messages.length <= 1 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.3, ease: easePremium }}
-                    className="px-5 pb-3 flex flex-wrap gap-2"
-                  >
-                    {SUGGESTIONS.map((s) => (
-                      <motion.button
-                        key={s}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        onClick={() => handleSuggestionClick(s)}
-                        className="px-3.5 py-2 rounded-full text-[11px] font-mono text-zinc-400 cursor-pointer transition-all duration-200 hover:text-white hover:bg-white/[0.06]"
+                      <div
+                        className="rounded-2xl rounded-bl-md"
                         style={{
-                          background: 'rgba(255,255,255,0.02)',
+                          background: 'rgba(255,255,255,0.03)',
                           border: '1px solid rgba(255,255,255,0.06)',
                         }}
-                        type="button"
                       >
-                        {s}
-                      </motion.button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                        <TypingIndicator />
+                      </div>
+                    </motion.div>
+                  )}
 
-              {/* ── Input Bar ── */}
-              <form
-                onSubmit={handleSubmit}
-                className="px-5 py-4 shrink-0"
-                style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
-              >
-                <div
-                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 focus-within:border-white/15"
-                  style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                  }}
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* ── Suggestion Chips ── */}
+                <AnimatePresence>
+                  {showSuggestions && messages.length <= 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.3, ease: easePremium }}
+                      className="px-5 pb-3 flex flex-wrap gap-2"
+                    >
+                      {SUGGESTIONS.map((s) => (
+                        <motion.button
+                          key={s}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          onClick={() => handleSuggestionClick(s)}
+                          className="px-3.5 py-2 rounded-full text-[11px] font-mono text-zinc-400 cursor-pointer transition-all duration-200 hover:text-white hover:bg-white/[0.06]"
+                          style={{
+                            background: 'rgba(255,255,255,0.02)',
+                            border: '1px solid rgba(255,255,255,0.06)',
+                          }}
+                          type="button"
+                        >
+                          {s}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* ── Input Bar ── */}
+                <form
+                  onSubmit={handleSubmit}
+                  className="px-5 py-4 shrink-0"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
                 >
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Ask me anything…"
-                    className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-600 focus:outline-none"
-                    disabled={isTyping}
-                  />
-                  <motion.button
-                    type="submit"
-                    disabled={!input.trim() || isTyping}
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.92 }}
-                    className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 cursor-pointer transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                  <div
+                    className="flex items-center gap-2 rounded-xl px-4 py-2.5 transition-all duration-300 focus-within:border-white/15"
                     style={{
-                      background:
-                        input.trim() && !isTyping
-                          ? 'rgba(255,255,255,0.9)'
-                          : 'rgba(255,255,255,0.04)',
+                      background: 'rgba(255,255,255,0.03)',
+                      border: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <Send
-                      className={`w-3.5 h-3.5 ${
-                        input.trim() && !isTyping ? 'text-black' : 'text-zinc-600'
-                      }`}
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Ask me anything…"
+                      className="flex-1 bg-transparent text-sm text-white placeholder:text-zinc-600 focus:outline-none"
+                      disabled={isTyping}
                     />
-                  </motion.button>
-                </div>
-                <p className="text-center text-[9px] font-mono text-zinc-600 mt-2 tracking-wider uppercase">
-                  Powered by NYXO Intelligence
-                </p>
-              </form>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                    <motion.button
+                      type="submit"
+                      disabled={!input.trim() || isTyping}
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.92 }}
+                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 cursor-pointer transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+                      style={{
+                        background:
+                          input.trim() && !isTyping
+                            ? 'rgba(255,255,255,0.9)'
+                            : 'rgba(255,255,255,0.04)',
+                      }}
+                    >
+                      <Send
+                        className={`w-3.5 h-3.5 ${input.trim() && !isTyping ? 'text-black' : 'text-zinc-600'
+                          }`}
+                      />
+                    </motion.button>
+                  </div>
+                  <p className="text-center text-[9px] font-mono text-zinc-600 mt-2 tracking-wider uppercase">
+                    Powered by NYXO Intelligence
+                  </p>
+                </form>
+              </motion.div>
+            </>
+          )
+        }
+      </AnimatePresence >
     </>
   );
 }

@@ -3,7 +3,6 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowUp } from 'lucide-react';
 import Navbar from './Navbar';
-import MemoryBanner from "./MemoryBanner";
 import Footer from './Footer';
 import PageTransition from './PageTransition';
 import AIChatbot from './AIChatbot';
@@ -29,9 +28,6 @@ export default function Layout() {
       <Navbar />
 
       <main className="relative z-20 pt-[72px] min-h-[calc(100vh-200px)]">
-        <div className="px-6 mb-8">
-          <MemoryBanner />
-        </div>
 
         <AnimatePresence mode="wait">
           <PageTransition key={location.pathname}>

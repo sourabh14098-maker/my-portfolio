@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+const SESSION_KEY = "portfolio-session";
 
 export interface PortfolioMemory {
     visits: number;
@@ -27,8 +28,13 @@ export function usePortfolioMemory() {
             setMemory(firstVisit);
         } else {
             const data = JSON.parse(saved);
+            const alreadyCounted = sessionStorage.getItem(SESSION_KEY);
 
-            data.visits += 1;
+            if (!alreadyCounted) {
+                data.visits += 1;
+                sessionStorage.setItem(SESSION_KEY, "true");
+            }
+
             data.lastVisit = new Date().toLocaleDateString();
 
             localStorage.setItem(
