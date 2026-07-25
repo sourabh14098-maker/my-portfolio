@@ -46,7 +46,7 @@ export default function HeroPage() {
         initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
         animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
         transition={playHeroEntrance ? undefined : { duration: 0.4, ease: easePremium }}
-        className="flex items-center gap-3 mb-2 sm:mb-3"
+        className="flex items-center gap-3 mb-1"
       >
         <span className="w-8 h-[1px] bg-zinc-600" />
         <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-zinc-400 font-medium">
@@ -54,14 +54,14 @@ export default function HeroPage() {
         </span>
       </motion.div>
 
-      {/* Desktop MemoryBanner (lg and above): Positioned directly BELOW the Founder label with 14px top spacing and 14px bottom spacing */}
+      {/* Desktop MemoryBanner (lg and above): Positioned directly BELOW the Founder label with 12px spacing and 420-430px width */}
       {isDesktop && (
         <motion.div
           variants={playHeroEntrance ? heroStaggerItem : undefined}
           initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
           animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
           transition={playHeroEntrance ? undefined : { duration: 0.45, ease: easePremium }}
-          className="mt-3.5 mb-3.5 w-full max-w-[400px] xl:max-w-[420px]"
+          className="mt-3 mb-3 w-full max-w-[420px] xl:max-w-[430px]"
         >
           <MemoryBanner />
         </motion.div>
@@ -184,7 +184,7 @@ export default function HeroPage() {
             )}
           </div>
 
-          {/* Right — Hero Image (Completely clean image without overlays) */}
+          {/* Right — Hero Image (Clean image with +3% brightness boost) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -198,7 +198,7 @@ export default function HeroPage() {
               <img
                 src={heroImage}
                 alt="Developer workspace"
-                className="w-full h-auto object-cover rounded-2xl"
+                className="w-full h-auto object-cover rounded-2xl brightness-[1.03]"
                 style={{ maxHeight: '520px' }}
               />
             </div>

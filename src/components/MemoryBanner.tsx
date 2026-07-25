@@ -43,7 +43,7 @@ export default function MemoryBanner() {
                         {/* Left Side Content */}
                         <div className="flex-1 min-w-0">
                             {/* Tiny Uppercase Muted Label */}
-                            <span className="block text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.28em] text-zinc-500 font-medium select-none">
+                            <span className="block text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-medium select-none">
                                 {labelText}
                             </span>
 
@@ -52,14 +52,14 @@ export default function MemoryBanner() {
                                 {titleText}
                             </h3>
 
-                            {/* Subtitle / Action Link - Muted with highlighted white semibold StudyHub */}
+                            {/* Subtitle / Action Link */}
                             {memory.lastProject ? (
                                 <Link
                                     to="/projects"
                                     className="group/link mt-1 inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-300 transition-colors duration-300"
                                 >
                                     <span>
-                                        Continue working on{" "}
+                                        Resume{" "}
                                         <strong className="text-white font-semibold group-hover/link:underline underline-offset-4 decoration-white/30">
                                             {memory.lastProject}
                                         </strong>
@@ -73,16 +73,16 @@ export default function MemoryBanner() {
                             )}
                         </div>
 
-                        {/* Thin Low Opacity Vertical Divider */}
-                        <div className="h-10 w-[1px] bg-white/[0.04] shrink-0 mx-1" />
+                        {/* Thin 12% Opacity Vertical Divider */}
+                        <div className="h-10 w-[1px] bg-white/[0.12] shrink-0 mx-1" />
 
                         {/* Right Side Stats Counter */}
                         <div className="flex flex-col items-center justify-center pl-1 shrink-0 select-none">
-                            <span className="text-xs sm:text-sm font-mono font-medium text-zinc-300 tracking-tight">
+                            <span className="text-[18px] font-mono font-semibold text-zinc-300 tracking-tight leading-none">
                                 {memory.visits}×
                             </span>
-                            <span className="text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.18em] text-zinc-500 font-normal mt-0.5">
-                                visits
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 font-medium mt-1">
+                                VISITS
                             </span>
                         </div>
                     </div>
