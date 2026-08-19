@@ -1,255 +1,189 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { ArrowUpRight, Download, Code2, FolderKanban, Users, Star, Mouse } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { ArrowRight, Code2, FolderKanban, Sparkles, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Reveal from './ui/Reveal';
 import { useIntro } from '../context/IntroContext';
 import { easePremium } from '../lib/motion';
-import heroImage from '../assets/images/hero_workspace.png';
+import heroImage from '../assets/images/cinematic_futuristic_hero.jpg';
 import MemoryBanner from "./MemoryBanner";
 
-const heroStaggerContainer = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
-    },
+// Subtly different float animations for each card to create organic feel
+const getFloatAnimation = (delay: number, duration: number, yRange: number[]) => ({
+  y: yRange,
+  transition: {
+    duration,
+    delay,
+    repeat: Infinity,
+    repeatType: 'reverse' as const,
+    ease: 'easeInOut',
   },
-};
-
-const heroStaggerItem = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.5, ease: easePremium },
-  },
-};
-
-const stats = [
-  { icon: FolderKanban, metric: '5+', label: 'Projects Built' },
-  { icon: Code2, metric: 'Web', label: 'Developer' },
-  { icon: Code2, metric: 'Java', label: 'Developer' },
-  { icon: Code2, metric: 'AI', label: 'Projects' },
-];
+});
 
 export default function HeroPage() {
   const { playHeroEntrance } = useIntro();
+  const { scrollY } = useScroll();
+  
+  // Subtle parallax effect on scroll for the background
+  const backgroundY = useTransform(scrollY, [0, 1000], ['0%', '15%']);
 
-  const renderLeftContent = (isDesktop: boolean) => (
-    <>
-      {/* Subtitle / Label */}
-      <motion.div
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.4, ease: easePremium }}
-        className="flex items-center gap-3 mb-1"
-      >
-        <span className="w-8 h-[1px] bg-zinc-600" />
-        <span className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-zinc-400 font-medium">
-          Founder & Software Developer
-        </span>
-      </motion.div>
-
-      {/* Desktop MemoryBanner (lg and above): Positioned directly BELOW the Founder label with 12px spacing and 420-430px width */}
-      {isDesktop && (
-        <motion.div
-          variants={playHeroEntrance ? heroStaggerItem : undefined}
-          initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
-          animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-          transition={playHeroEntrance ? undefined : { duration: 0.45, ease: easePremium }}
-          className="mt-3 mb-3 w-full max-w-[420px] xl:max-w-[430px]"
-        >
-          <MemoryBanner />
-        </motion.div>
-      )}
-
-      {/* Main Title */}
-      <motion.h1
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 24 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.5, ease: easePremium }}
-        id="main-hero-title"
-        className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-display font-extrabold tracking-tight text-white leading-[0.85] uppercase"
-      >
-        NYXO
-      </motion.h1>
-
-      {/* Tagline */}
-      <motion.h2
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 20 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.45, ease: easePremium }}
-        className="text-2xl sm:text-3xl md:text-4xl font-display font-light text-zinc-300 tracking-tight leading-snug"
-      >
-        Crafting Digital Experiences.
-      </motion.h2>
-
-      {/* Description */}
-      <motion.p
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.4, delay: 0.05, ease: easePremium }}
-        id="hero-desc"
-        className="max-w-[440px] text-[15px] sm:text-base text-zinc-400 leading-7"
-      >
-        I build modern, scalable and high-performance
-        web applications that solve real problems
-        and deliver exceptional user experiences.
-      </motion.p>
-
-      {/* CTA Buttons */}
-      <motion.div
-        variants={playHeroEntrance ? heroStaggerItem : undefined}
-        initial={playHeroEntrance ? undefined : { opacity: 0, y: 16 }}
-        animate={playHeroEntrance ? undefined : { opacity: 1, y: 0 }}
-        transition={playHeroEntrance ? undefined : { duration: 0.4, delay: 0.1, ease: easePremium }}
-        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-2"
-      >
-        <Link
-          to="/projects"
-          id="hero-projects-btn"
-          className="group inline-flex w-full sm:w-auto min-h-[48px] items-center justify-center gap-2.5 rounded-full border border-white/20 bg-transparent px-7 text-[14px] font-medium text-white tracking-wide transition-all duration-300 hover:bg-white hover:text-black hover:border-white"
-        >
-          View Projects
-          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </Link>
-
-        <Link
-          to="/contact"
-          className="inline-flex w-full sm:w-auto min-h-[48px] items-center justify-center rounded-full border border-zinc-700 px-7 text-[14px] font-medium text-zinc-300 transition-all duration-300 hover:border-white hover:text-white"
-        >
-          Contact Me
-        </Link>
-      </motion.div>
-    </>
-  );
+  // Floating info cards data
+  const cards: Array<{
+    id: number;
+    icon: React.ElementType;
+    title: string;
+    subtitle: string;
+    top?: string;
+    right?: string;
+    bottom?: string;
+    left?: string;
+    hiddenMobile?: boolean;
+    floatConfig: number | number[] | any;
+  }> = [
+    { id: 1, icon: FolderKanban, title: '5+', subtitle: 'PROJECTS BUILT', top: '20%', right: '12%', floatConfig: [0, 4, [-5, 5]] },
+    { id: 2, icon: Code2, title: 'FRONTEND', subtitle: 'DEVELOPER', top: '45%', right: '8%', floatConfig: [1.2, 5, [-8, 4]] },
+    { id: 3, icon: Terminal, title: 'CURRENTLY', subtitle: 'BUILDING', bottom: '25%', right: '28%', hiddenMobile: true, floatConfig: [0.5, 4.5, [-4, 6]] },
+    { id: 4, icon: Sparkles, title: 'AI', subtitle: 'PROJECTS', bottom: '15%', right: '10%', floatConfig: [2, 5.5, [-6, 3]] },
+  ];
 
   return (
-    <motion.section
-      id="hero"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: easePremium }}
-      className="relative min-h-screen flex flex-col"
-    >
-      {/* Mobile Header MemoryBanner (<768px / md) */}
-      <div className="w-full md:hidden pt-6 px-4 flex justify-center">
-        <div className="w-[calc(100%-32px)] max-w-[420px]">
-          <MemoryBanner />
-        </div>
+    <section className="relative min-h-[100svh] w-full flex items-center justify-start overflow-hidden pt-28 pb-12 bg-[#020205]">
+      {/* 1. Cinematic Parallax Background */}
+      <motion.div
+        initial={playHeroEntrance ? { scale: 1.05, opacity: 0 } : false}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.8, ease: easePremium }}
+        style={{ y: backgroundY }}
+        className="absolute inset-0 z-0 origin-center"
+      >
+        <img
+          src={heroImage}
+          alt="Cinematic 3D Digital Workspace"
+          className="w-full h-[120%] object-cover -mt-[10%]"
+        />
+        {/* Cinematic Overlays: Deep charcoal, muted cyan/violet hints */}
+        <div className="absolute inset-0 bg-black/40 backdrop-saturate-[0.85]" />
+        
+        {/* Left-side dark gradient to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#030308] via-[#030308]/80 to-transparent w-[80%]" />
+        
+        {/* Bottom vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030308] via-transparent to-transparent opacity-90 h-full" />
+        
+        {/* Top vignette */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030308] via-transparent to-transparent opacity-50 h-[30%]" />
+      </motion.div>
+
+      {/* 2. Floating Cards (Desktop/Tablet) */}
+      <div className="absolute inset-0 z-10 pointer-events-none hidden md:block max-w-[1500px] mx-auto w-full">
+        {cards.map((card, index) => {
+          const [delay, duration, yRange] = card.floatConfig as [number, number, number[]];
+          return (
+            <motion.div
+              key={card.id}
+              initial={playHeroEntrance ? { opacity: 0, scale: 0.9, y: 30 } : false}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: playHeroEntrance ? 0.8 + index * 0.15 : 0, ease: easePremium }}
+              style={{ top: card.top, right: card.right, bottom: card.bottom, left: card.left }}
+              className={`absolute pointer-events-auto ${card.hiddenMobile ? 'hidden lg:flex' : 'flex'}`}
+            >
+              <motion.div
+                animate={getFloatAnimation(delay, duration, yRange)}
+                whileHover={{ scale: 1.05, y: -4, backgroundColor: 'rgba(20, 25, 40, 0.45)' }}
+                className="group flex flex-col gap-1.5 p-4 rounded-[20px] bg-[#0a0c12]/40 backdrop-blur-2xl border border-white/10 hover:border-cyan-400/20 transition-all duration-500 shadow-[0_16px_40px_rgba(0,0,0,0.6)] cursor-default min-w-[150px]"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <card.icon className="w-4 h-4 text-cyan-300/70 group-hover:text-cyan-300 transition-colors duration-300" />
+                  <span className="text-[#f4f4f5] font-display text-[15px] font-semibold tracking-tight">{card.title}</span>
+                </div>
+                <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8b92a5] group-hover:text-[#b8bed3] transition-colors duration-300">
+                  {card.subtitle}
+                </span>
+              </motion.div>
+            </motion.div>
+          )
+        })}
       </div>
 
-      {/* Hero Content — Split Layout */}
-      <div className="flex-1 flex items-center w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 pt-6 md:pt-12 lg:pt-16 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
-          {/* Left — Content Column */}
-          <div className="flex flex-col gap-5 sm:gap-6">
-            {/* Tablet Banner (768px - 1023px): Centered above hero heading */}
-            <div className="hidden md:block lg:hidden mb-2 w-full max-w-[460px] mx-auto">
+      {/* 3. Main Hero Content */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16 flex flex-col items-start justify-center h-full">
+        <div className="w-full max-w-[600px] mt-4 lg:mt-0 flex flex-col gap-7">
+          <motion.div
+            initial={playHeroEntrance ? { opacity: 0, y: 30 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: playHeroEntrance ? 0.3 : 0, ease: easePremium }}
+            className="flex flex-col gap-7"
+          >
+            {/* Memory Banner placement */}
+            <div className="w-full max-w-[420px] mb-2 hidden md:block">
               <MemoryBanner />
             </div>
 
-            {playHeroEntrance ? (
-              <motion.div
-                className="flex flex-col gap-5 sm:gap-6"
-                variants={heroStaggerContainer}
-                initial="hidden"
-                animate="show"
+            {/* Eyebrow Label */}
+            <div className="inline-flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-60"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.3em] text-[#8b92a5] font-semibold">
+                AVAILABLE FOR WORK
+              </span>
+            </div>
+
+            {/* Cinematic Headline */}
+            <h1 className="text-[3.5rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-display font-extrabold text-[#f4f4f5] leading-[0.9] tracking-[-0.03em] uppercase">
+              I BUILD<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#b8bed3] to-[#606a85]">DIGITAL</span><br />
+              EXPERIENCES.
+            </h1>
+
+            {/* Supporting Description */}
+            <p className="text-[15px] sm:text-lg text-[#8b92a5] leading-[1.8] max-w-[480px] font-medium">
+              Frontend developer focused on building modern, responsive and high-performance digital experiences with React, JavaScript and AI-powered technologies.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-6">
+              <Link
+                to="/projects"
+                className="group relative flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-[#111420]/60 hover:bg-[#161a29]/80 border border-white/10 hover:border-cyan-400/30 backdrop-blur-xl text-[13px] tracking-[0.1em] font-semibold text-[#f4f4f5] transition-all duration-500 overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(34,211,238,0.15)]"
               >
-                {/* Render desktop-specific layout containing MemoryBanner under label */}
-                <div className="hidden lg:flex flex-col gap-5 sm:gap-6">
-                  {renderLeftContent(true)}
-                </div>
-                {/* Render mobile/tablet left content without internal MemoryBanner */}
-                <div className="flex lg:hidden flex-col gap-5 sm:gap-6">
-                  {renderLeftContent(false)}
-                </div>
-              </motion.div>
-            ) : (
-              <div className="flex flex-col gap-5 sm:gap-6">
-                <div className="hidden lg:flex flex-col gap-5 sm:gap-6">
-                  {renderLeftContent(true)}
-                </div>
-                <div className="flex lg:hidden flex-col gap-5 sm:gap-6">
-                  {renderLeftContent(false)}
-                </div>
-              </div>
-            )}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                <span className="relative z-10">VIEW PROJECTS</span>
+                <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/contact"
+                className="group flex items-center justify-center gap-2 px-9 py-4 rounded-full bg-transparent hover:bg-white/5 border border-transparent hover:border-white/10 text-[13px] tracking-[0.1em] font-semibold text-[#8b92a5] hover:text-[#f4f4f5] transition-all duration-400"
+              >
+                LET'S CONNECT
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Mobile Memory Banner */}
+          <div className="w-full md:hidden mt-2">
+             <MemoryBanner />
           </div>
 
-          {/* Right — Hero Image (Clean image with +3% brightness boost) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: playHeroEntrance ? 0.3 : 0.1, ease: easePremium }}
-            className="relative hidden lg:block"
+          {/* Mobile Cards (stacked horizontally below text) */}
+          <motion.div 
+            initial={playHeroEntrance ? { opacity: 0, y: 20 } : false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: playHeroEntrance ? 0.6 : 0, ease: easePremium }}
+            className="md:hidden grid grid-cols-2 gap-3 mt-8 w-full pb-10"
           >
-            <div className="relative rounded-2xl overflow-hidden">
-              {/* Subtle vignette overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent z-10 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent z-10 pointer-events-none" />
-              <img
-                src={heroImage}
-                alt="Developer workspace"
-                className="w-full h-auto object-cover rounded-2xl brightness-[1.03]"
-                style={{ maxHeight: '520px' }}
-              />
-            </div>
+            {cards.filter(c => !c.hiddenMobile).map((card) => (
+              <div key={card.id} className="flex flex-col gap-1 p-4 rounded-xl bg-[#0a0c12]/80 backdrop-blur-xl border border-white/10 shadow-lg">
+                <div className="flex items-center gap-2 mb-1">
+                  <card.icon className="w-3.5 h-3.5 text-cyan-300/80" />
+                  <span className="text-[#f4f4f5] font-display text-[13px] font-semibold">{card.title}</span>
+                </div>
+                <span className="text-[9px] font-mono uppercase tracking-[0.15em] text-[#8b92a5]">{card.subtitle}</span>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
-
-      {/* Stats Bar */}
-      <Reveal className="w-full border-t border-white/[0.06]" delay={playHeroEntrance ? 0.5 : 0.15}>
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-white/[0.08]">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="group flex items-center gap-3 justify-start px-2 sm:px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/[0.03]"
-              >
-                <div className="flex items-center justify-center w-11 h-11 rounded-xl border border-white/10 bg-white/[0.03] transition-all duration-300 group-hover:border-white/20 group-hover:scale-105">
-                  <stat.icon className="w-5 h-5 text-zinc-400" />
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight">
-                    {stat.metric}
-                  </div>
-                  <div className="text-xs text-zinc-500 font-mono tracking-wider uppercase mt-0.5">
-                    {stat.label}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Scroll to Explore */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: playHeroEntrance ? 0.7 : 0.3, ease: easePremium }}
-        className="hidden lg:flex flex-col items-center gap-3 pb-8"
-      >
-        <div className="w-6 h-10 rounded-full border border-white/15 flex items-start justify-center pt-2">
-          <motion.div
-            className="w-1 h-2.5 rounded-full bg-white/60"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
-        <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-zinc-600">
-          Scroll to Explore
-        </span>
-      </motion.div>
-    </motion.section>
+    </section>
   );
 }

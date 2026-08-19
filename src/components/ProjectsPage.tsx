@@ -13,47 +13,58 @@ export default function ProjectsPage() {
   return (
     <section className="section-page relative z-10">
       <div className="max-w-7xl mx-auto">
-        <PageHeader
-          label="Projects"
-          title="Selected Work"
-          description="Projects built with focus on detail, clean code, and intuitive user experience."
-        />
+        <div className="mb-20 md:mb-28 max-w-3xl">
+          <Reveal>
+            <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.2em] mb-5">
+              SELECTED WORK
+            </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-white mb-6 tracking-tight">
+              Selected Work
+            </h2>
+            <p className="text-lg md:text-xl text-zinc-400 leading-relaxed max-w-2xl">
+              Projects built with focus on detail, clean code, and intuitive user experience.
+            </p>
+          </Reveal>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
           {projectsData.map((project, index) => {
-            const isFeatured = index % 3 === 0;
+            const isFeatured = index === 0;
             return (
-              <Reveal key={project.id} delay={index * 0.06} className={`md:col-span-12 ${isFeatured ? 'lg:col-span-8' : 'lg:col-span-4'}`}>
+              <Reveal key={project.id} delay={index * 0.1} className={isFeatured ? 'lg:col-span-8' : 'lg:col-span-4'}>
                 <motion.article
-                  whileHover={{ y: -4 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                  className="premium-card rounded-3xl overflow-hidden flex flex-col h-full group"
+                  whileHover={{ y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative flex flex-col h-full rounded-[24px] bg-[#0a0a0a] border border-[#1a1a1a] overflow-hidden group hover:border-[#2a2a2a]"
+                  style={{ boxShadow: "0 10px 40px -10px rgba(0,0,0,0.2)" }}
                 >
-                  <div className={`relative ${isFeatured ? 'h-64 sm:h-80' : 'h-52 sm:h-60'} overflow-hidden border-b border-[rgba(255,255,255,0.05)]`}>
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-60" />
-                    <span className="absolute top-5 left-5 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-300 bg-black/40 backdrop-blur-md border border-white/10 rounded-full">
-                      {project.subtitle}
-                    </span>
+                  <div className="p-2 pb-0">
+                    <div className={`relative overflow-hidden rounded-[20px] bg-[#111] border border-[#1a1a1a] ${isFeatured ? 'aspect-[16/10] md:aspect-[16/9]' : 'aspect-[16/10] sm:aspect-video lg:aspect-[4/5]'}`}>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        referrerPolicy="no-referrer"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-black/5 pointer-events-none transition-opacity duration-500 group-hover:opacity-0" />
+                    </div>
                   </div>
 
-                  <div className="p-6 sm:p-8 flex flex-col flex-1 text-left relative z-10">
-                    <h3 className={`font-display font-semibold text-white mb-3 group-hover:text-accent transition-colors ${isFeatured ? 'text-2xl sm:text-3xl' : 'text-xl'}`}>
+                  <div className="p-6 md:p-8 flex flex-col flex-1 text-left relative z-10">
+                    <p className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 mb-4">
+                      {project.subtitle}
+                    </p>
+                    <h3 className="font-display font-medium text-white mb-3 text-xl md:text-2xl transition-colors">
                       {project.title}
                     </h3>
-                    <p className={`text-zinc-400 leading-relaxed mb-6 flex-1 ${isFeatured ? 'text-base sm:text-lg' : 'text-sm'}`}>
+                    <p className="text-zinc-400 leading-relaxed mb-8 flex-1 text-sm md:text-[15px]">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-8">
-                      {project.tags.slice(0, isFeatured ? 5 : 3).map((tag) => (
+                      {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[11px] font-mono text-zinc-400 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.05]"
+                          className="text-[11px] font-mono text-zinc-400 bg-white/[0.03] border border-white/[0.05] px-2.5 py-1 rounded-md"
                         >
                           {tag}
                         </span>
@@ -71,10 +82,10 @@ export default function ProjectsPage() {
                         setSelectedProject(project);
                       }}
                       id={`case-study-trigger-${project.id}`}
-                      className="btn-secondary !w-full !justify-between !px-6"
+                      className="inline-flex items-center gap-2 text-sm font-medium transition-colors self-start"
                     >
-                      <span>Explore Project</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      <span className="text-zinc-300 group-hover:text-white transition-colors duration-300">Explore Project</span>
+                      <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-white transition-all duration-300 group-hover:translate-x-1" />
                     </button>
                   </div>
                 </motion.article>

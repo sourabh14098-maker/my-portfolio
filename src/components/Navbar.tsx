@@ -32,11 +32,11 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-4 md:top-6 left-0 right-0 z-50 flex justify-center px-4 sm:px-6">
       <nav
-        className={`flex h-[72px] w-full items-center justify-between px-8 sm:px-12 lg:px-16 transition-all duration-500 ${scrolled
-            ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.06]'
-            : 'bg-transparent'
+        className={`flex h-[60px] md:h-[64px] w-full max-w-6xl items-center justify-between px-6 md:px-8 rounded-full transition-all duration-500 border ${scrolled
+            ? 'bg-[#0a0c12]/80 backdrop-blur-2xl border-white/[0.1] shadow-[0_12px_40px_rgba(0,0,0,0.6)]'
+            : 'bg-[#0a0c12]/30 backdrop-blur-xl border-white/[0.05] shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
           }`}
       >
         {/* Logo */}
@@ -99,13 +99,13 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.98 }}
             transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-0 right-0 top-[72px] z-40 lg:hidden"
+            className="absolute left-4 right-4 md:left-6 md:right-6 top-[80px] md:top-[90px] z-40 lg:hidden origin-top"
           >
-            <div className="flex flex-col gap-1 border-b border-white/[0.06] bg-black/95 p-4 backdrop-blur-2xl">
+            <div className="flex flex-col gap-1 rounded-[24px] border border-white/[0.1] bg-[#0a0c12]/95 p-4 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
               {navLinks.map((link) => {
                 const active = isActive(link.path);
                 return (
