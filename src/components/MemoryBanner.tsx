@@ -68,7 +68,7 @@ export default function MemoryBanner() {
                                 </Link>
                             ) : (
                                 <p className="mt-1 text-xs text-zinc-500 leading-relaxed font-normal">
-                                    {isFirstVisit ? "Enjoy exploring my projects & skills." : "Your portfolio journey continues."}
+                                    {isFirstVisit ? "Enjoy exploring my projects & experience." : "Your portfolio journey continues."}
                                 </p>
                             )}
                         </div>

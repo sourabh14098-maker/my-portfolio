@@ -3,11 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import HeroPage from './components/HeroPage';
 import AboutPage from './components/AboutPage';
-import SkillsPage from './components/SkillsPage';
 import ProjectsPage from './components/ProjectsPage';
 import ContactPage from './components/ContactPage';
 import Layout from './components/Layout';
@@ -36,9 +35,9 @@ export default function App() {
               <Route element={<Layout />}>
                 <Route index element={<HeroPage />} />
                 <Route path="about" element={<AboutPage />} />
-                <Route path="skills" element={<SkillsPage />} />
                 <Route path="projects" element={<ProjectsPage />} />
                 <Route path="contact" element={<ContactPage />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Route>
             </Routes>
           </Router>

@@ -10,8 +10,6 @@ const PORTFOLIO_KNOWLEDGE: Record<string, string> = {
     `NYXO is a portfolio by Sourabh — a passionate Computer Science student and Software Developer from India. He focuses on building modern, responsive, and highly interactive web applications. He's currently learning the MERN stack and building real-world projects. He's open to internship opportunities and exciting collaborations.`,
   projects:
     `Sourabh has built 5+ projects including:\n\n• **StudyHub** — A student notes sharing platform with file uploads, search, and a clean modern interface. Built with React, Node.js, Express, MongoDB & Tailwind. Live at studyhub-notes.netlify.app\n\n• **Aura Fitness** — A modern workout and fitness tracking platform with fluid animations and responsive design. Built with React, Tailwind & Framer Motion. Live at aura-fitness.netlify.app\n\n• **NYXO Portfolio** — This premium portfolio website itself, built with React, TypeScript, Framer Motion & Tailwind CSS.`,
-  skills:
-    `Sourabh's technical stack includes:\n\n**Frontend:** HTML (90%), CSS (88%), JavaScript (82%), React (78%), Next.js (70%), Tailwind CSS (84%)\n\n**Backend:** Node.js (68%), Express (64%)\n\n**Database:** MongoDB (66%)\n\n**Tools:** Git (76%), GitHub (78%), VS Code (88%), Postman (62%), Netlify (72%)`,
   java:
     `Sourabh is a Java developer with knowledge in core Java concepts, object-oriented programming, data structures & algorithms. Java is one of his development pillars alongside web technologies.`,
   ai:
@@ -28,7 +26,7 @@ const PORTFOLIO_KNOWLEDGE: Record<string, string> = {
     `The primary technologies Sourabh works with include React, JavaScript, TypeScript, Node.js, Express, MongoDB, Tailwind CSS, Framer Motion, Next.js, Git, and GitHub. He's proficient in the MERN stack (MongoDB, Express, React, Node.js).`,
 };
 
-const GREETING = `Hey there! 👋 I'm NYXO AI — your personal guide to this portfolio. Ask me anything about Sourabh's projects, skills, experience, or how to get in touch!`;
+const GREETING = `Hey there! 👋 I'm NYXO AI — your personal guide to this portfolio. Ask me anything about Sourabh's projects, experience, or how to get in touch!`;
 
 /* ─────────────────────── Helpers ─────────────────────── */
 
@@ -40,7 +38,7 @@ function findBestAnswer(query: string): string {
     [['studyhub', 'study hub', 'notes', 'sharing platform'], 'studyhub'],
     [['fitness', 'aura', 'workout', 'gym'], 'fitness'],
     [['project', 'built', 'portfolio work', 'show me', 'show my', 'what have you built', 'work'], 'projects'],
-    [['skill', 'stack', 'tech', 'technologies', 'language', 'framework', 'tool'], 'skills'],
+    [['stack', 'tech', 'technologies', 'language', 'framework', 'tool'], 'technologies'],
     [['java', 'oop', 'object oriented'], 'java'],
     [['ai', 'artificial', 'machine learning', 'ml', 'intelligent'], 'ai'],
     [['contact', 'email', 'reach', 'hire', 'connect', 'linkedin', 'github', 'mail'], 'contact'],
@@ -57,7 +55,7 @@ function findBestAnswer(query: string): string {
 
   // Greeting patterns
   if (/^(hi|hello|hey|sup|yo|greetings|howdy)/i.test(q.trim())) {
-    return `Hello! 👋 Great to have you here. I can tell you about Sourabh's projects, skills, tech stack, experience, or contact information. What would you like to know?`;
+    return `Hello! 👋 Great to have you here. I can tell you about Sourabh's projects, tech stack, experience, or contact information. What would you like to know?`;
   }
 
   // Thank you
@@ -66,7 +64,7 @@ function findBestAnswer(query: string): string {
   }
 
   // Fallback
-  return `That's an interesting question! While I'm specialized in answering questions about this portfolio, I can help with info about Sourabh's **projects**, **skills**, **experience**, **technologies**, or **contact details**. Try asking about any of those!`;
+  return `That's an interesting question! While I'm specialized in answering questions about this portfolio, I can help with info about Sourabh's **projects**, **experience**, **technologies**, or **contact details**. Try asking about any of those!`;
 }
 
 /* ─────────────────────── Types ─────────────────────── */
@@ -82,7 +80,6 @@ interface ChatMessage {
 const SUGGESTIONS = [
   'Tell me about NYXO',
   'Show my projects',
-  'My skills',
   'Java projects',
   'AI projects',
   'Contact me',

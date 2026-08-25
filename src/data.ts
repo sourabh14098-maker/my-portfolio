@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { TimelineEvent, SkillCategory, Project, Achievement } from './types';
+import { TimelineEvent, Project, Achievement } from './types';
 
 export const timelineData: TimelineEvent[] = [
   {
@@ -29,38 +29,6 @@ export const timelineData: TimelineEvent[] = [
       'Focused on scalable web applications and frontend engineering.',
     icon: 'Cpu',
     status: 'ongoing',
-  },
-];
-
-export const skillsData: SkillCategory[] = [
-  {
-    category: 'Frontend',
-    skills: [
-      { name: 'HTML', level: 90 },
-      { name: 'CSS', level: 88 },
-      { name: 'JavaScript', level: 82 },
-      { name: 'React', level: 78 },
-      { name: 'Next.js', level: 70 },
-      { name: 'Tailwind', level: 84 },
-    ],
-  },
-  {
-    category: 'Backend',
-    skills: [{ name: 'Node.js', level: 68 }, { name: 'Express', level: 64 }],
-  },
-  {
-    category: 'Database',
-    skills: [{ name: 'MongoDB', level: 66 }],
-  },
-  {
-    category: 'Tools',
-    skills: [
-      { name: 'Git', level: 76 },
-      { name: 'GitHub', level: 78 },
-      { name: 'VS Code', level: 88 },
-      { name: 'Postman', level: 62 },
-      { name: 'Netlify', level: 72 },
-    ],
   },
 ];
 

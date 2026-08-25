@@ -11,15 +11,9 @@ export interface TimelineEvent {
   status: 'completed' | 'ongoing' | 'future';
 }
 
-export interface Skill {
+export interface NavItem {
   name: string;
-  level: number; // 0 to 100 for visualization
-  icon?: string;
-}
-
-export interface SkillCategory {
-  category: string;
-  skills: Skill[];
+  path: string;
 }
 
 export interface CaseStudy {
